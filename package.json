@@ -1,0 +1,13 @@
+{
+  "name": "apothecary-ghost",
+  "version": "0.1.0",
+  "description": "The Apothecary's Ghost: a spooky-but-warm tour of 19th-century remedies and what they became. History, not medical advice.",
+  "type": "module",
+  "license": "MIT",
+  "private": true,
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test \"tests/*.test.js\""
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "banner": "History, not medical advice.",
+  "poisonWarning": "Poisonous: never try at home.",
+  "remedies": [
+    {
+      "id": "willow-bark",
+      "name": "Willow bark",
+      "jar": { "label": "Salix", "color": "#b98b4a" },
+      "poison": false,
+      "then": [
+        "Willow was used for fever in ancient times. In 1763 the Rev. Edward Stone wrote to the Royal Society about it, reporting about 50 patients.",
+        "Salicin was isolated from willow in 1828. Gerhardt first made acetylsalicylic acid in 1853 but never marketed it.",
+        "Bayer's team made it in 1897. Hoffmann is usually named, but historians say Arthur Eichengrün played a significant role. “Aspirin” was registered as a trademark on 6 March 1899."
+      ],
+      "now": "Modern aspirin, a medicine with real risks. A doctor or pharmacist decides if it suits a person.",
+      "sources": [
+        { "title": "Aspirin: The Story of a Wonder Drug (BMJ, via PMC)", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC535471/" },
+        { "title": "Felix Hoffmann (Science History Institute)", "url": "https://www.sciencehistory.org/education/scientific-biographies/felix-hoffmann/" },
+        { "title": "The Story of Aspirin (National Library of Medicine)", "url": "https://www.nlm.nih.gov/exhibition/the-story-of-aspirin/index.html" }
+      ]
+    },
+    {
+      "id": "cinchona-quinine",
+      "name": "Cinchona bark and quinine",
+      "jar": { "label": "Cinchona", "color": "#a4573c" },
+      "poison": false,
+      "then": [
+        "Jesuit missionaries brought the bark to Europe in the 1600s as a fever remedy. The tale of the Countess of Chinchón being cured by it is a legend.",
+        "In 1820 Pelletier and Caventou isolated quinine, and purified quinine then replaced the bark.",
+        "Woodward and Doering's 1944 work was a formal synthesis. They built quinotoxine, and Rabe and Kindler had reported its conversion to quinine in 1918. The sparse 1918 details led Stork (2001) to dispute the “total synthesis” claim. A 2008 paper confirmed the conversion."
+      ],
+      "now": "Modern antimalarial medicines.",
+      "sources": [
+        { "title": "Natural Products That Changed Society (PMC)", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8146924/" },
+        { "title": "Pierre-Joseph Pelletier (Britannica)", "url": "https://www.britannica.com/biography/Pierre-Joseph-Pelletier" },
+        { "title": "Malarial Subjects (NCBI Bookshelf)", "url": "https://www.ncbi.nlm.nih.gov/books/n/wt605891/ch1/" },
+        { "title": "Rabe-Kindler conversion confirmed, 2008 (PubMed)", "url": "https://pubmed.ncbi.nlm.nih.gov/18236503/" }
+      ]
+    },
+    {
+      "id": "foxglove",
+      "name": "Foxglove",
+      "jar": { "label": "Digitalis", "color": "#8a5a9e" },
+      "poison": true,
+      "then": [
+        "In 1775 William Withering learned of a country woman's herbal remedy for dropsy. It contained about 20 herbs, and he singled out foxglove.",
+        "He studied it for about ten years and published An Account of the Foxglove in 1785, including its toxic effects."
+      ],
+      "now": "Digitalis-derived heart medicines, still prescribed today.",
+      "sources": [
+        { "title": "An Account of the Fox Glove (PMC)", "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5545334/" },
+        { "title": "William Withering (Linda Hall Library)", "url": "https://www.lindahall.org/about/news/scientist-of-the-day/william-withering/" }
+      ]
+    },
+    {
+      "id": "laudanum",
+      "name": "Laudanum",
+      "jar": { "label": "Laudanum", "color": "#6e2f2f" },
+      "poison": true,
+      "then": [
+        "The name is credited to Paracelsus (16th century), for an opium preparation. Thomas Sydenham published his own laudanum recipe in the 1660s–1670s, a tincture of opium in wine with spices.",
+        "Thomas De Quincey's Confessions of an English Opium-Eater describes addiction.",
+        "Friedrich Sertürner isolated morphine from opium around 1804."
+      ],
+      "now": "Morphine and today's tightly controlled opioid medicines.",
+      "sources": [
+        { "title": "Thomas Sydenham (Britannica)", "url": "https://www.britannica.com/biography/Thomas-Sydenham" },
+        { "title": "Thomas De Quincey (Britannica)", "url": "https://www.britannica.com/biography/Thomas-De-Quincey" },
+        { "title": "Friedrich Sertürner (Britannica)", "url": "https://www.britannica.com/biography/Friedrich-Serturner" },
+        { "title": "Reciprocal Evolution of Opiate Science (PMC)", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5478244/" }
+      ]
+    },
+    {
+      "id": "leeches",
+      "name": "Leeches",
+      "jar": { "label": "Hirudo", "color": "#3f5a3c" },
+      "poison": false,
+      "then": [
+        "Leeches were used for centuries in bloodletting.",
+        "In June 2004 the US FDA cleared medicinal leeches as a prescription medical device, as an adjunct to graft tissue healing when venous congestion may delay it.",
+        "The bite produces anticoagulant and vasodilator substances, which is why they help in that case. The species sold as Hirudo medicinalis is genetically Hirudo verbana."
+      ],
+      "now": "A narrow, supervised role in reconstructive surgery.",
+      "sources": [
+        { "title": "FDA 510(k) K040187, Medicinal Leeches", "url": "https://www.accessdata.fda.gov/cdrh_docs/pdf4/k040187.pdf" },
+        { "title": "Commercially available medicinal leeches are not Hirudo medicinalis (PubMed)", "url": "https://pubmed.ncbi.nlm.nih.gov/17426015/" }
+      ]
+    },
+    {
+      "id": "mercury",
+      "name": "Mercury and calomel",
+      "jar": { "label": "Hydrargyrum", "color": "#7d8794" },
+      "poison": true,
+      "then": [
+        "Mercury was the syphilis treatment for about four centuries, with severe harm such as organ failure, nerve damage and tooth loss.",
+        "Mercury-containing teething powders for babies stayed on sale into the 1950s. In some children they caused “pink disease” (acrodynia). One review counts thousands of cases from the 1920s into the 1950s.",
+        "The UK removed calomel from teething powders around 1955. The exact date varied by country."
+      ],
+      "now": "Antibiotics, and strict limits on mercury.",
+      "sources": [
+        { "title": "Acrodynia (Britannica)", "url": "https://www.britannica.com/science/acrodynia" },
+        { "title": "The puzzle of pink disease (PMC)", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1297367/" },
+        { "title": "The history of syphilis, part two (Science Museum)", "url": "https://www.sciencemuseum.org.uk/objects-and-stories/history-syphilis-part-two-treatments-cures-and-legislation" },
+        { "title": "Hallmarks in history of syphilis therapeutics (PubMed)", "url": "https://pubmed.ncbi.nlm.nih.gov/24335464/" }
+      ]
+    },
+    {
+      "id": "arsenic",
+      "name": "Arsenic tonics",
+      "jar": { "label": "Arsenicum", "color": "#c9c27a" },
+      "poison": true,
+      "then": [
+        "Fowler's solution was a 1% potassium arsenite solution made by Thomas Fowler of Edinburgh. It was used for many ailments, including leukaemia from the 1860s onward.",
+        "Paul Ehrlich developed Salvarsan, an arsenic compound for syphilis, in 1910.",
+        "A Hong Kong hospital made oral Fowler's solution for leukaemia until the mid-1950s."
+      ],
+      "now": "Fowler's solution is not used today. Arsenic trioxide is given only intravenously, under specialist care, for acute promyelocytic leukaemia.",
+      "sources": [
+        { "title": "Resurrection of Oral Arsenic Trioxide for APL (PMC)", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7418518/" },
+        { "title": "The history of arsenic trioxide in cancer therapy (PubMed)", "url": "https://pubmed.ncbi.nlm.nih.gov/11331433/" }
+      ]
+    },
+    {
+      "id": "cod-liver-oil",
+      "name": "Cod liver oil",
+      "jar": { "label": "Oleum", "color": "#d3a64a" },
+      "poison": false,
+      "then": [
+        "Trousseau (1861) judged it a cure for rickets.",
+        "In 1918 Mellanby showed it prevented rickets in puppies, and McCollum's group named the factor “vitamin D”.",
+        "Windaus won the 1928 Nobel Prize in Chemistry “for the services rendered through his research into the constitution of the sterols and their connection with the vitamins”."
+      ],
+      "now": "Vitamin D, and fortified milk in the 1930s–1940s, which greatly reduced rickets.",
+      "sources": [
+        { "title": "Vitamin D, cod-liver oil, sunlight, and rickets (PubMed)", "url": "https://pubmed.ncbi.nlm.nih.gov/12897318/" },
+        { "title": "History of the discovery of vitamin D (PMC)", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3899558/" },
+        { "title": "Adolf Windaus, Nobel Prize in Chemistry 1928", "url": "https://www.nobelprize.org/prizes/chemistry/1928/windaus/facts/" }
+      ]
+    }
+  ]
+}

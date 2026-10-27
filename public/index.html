@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Apothecary's Ghost</title>
+  <meta name="description" content="A candlelit apothecary shop of old remedies and what they became. History, not medical advice.">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="glow" aria-hidden="true"></div>
+  <header class="top">
+    <h1>The Apothecary's Ghost</h1>
+    <p class="tagline">Mind the candles. Choose a jar.</p>
+    <p class="banner">History, not medical advice.</p>
+  </header>
+
+  <main>
+    <section class="shop" id="shop" aria-label="Shelves of apothecary jars">
+      <p class="loading" id="loading">Lighting the candles&hellip;</p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>I am a made-up ghost telling old stories from a checked fact sheet. I can't tell you what to take or avoid. For your health, ask a doctor or pharmacist.</p>
+  </footer>
+
+  <dialog id="card" aria-labelledby="card-title">
+    <article>
+      <button class="close" id="card-close" aria-label="Close">&times;</button>
+      <h2 id="card-title"></h2>
+      <p class="banner">History, not medical advice.</p>
+      <p class="warning" id="card-warning" hidden></p>
+      <div class="then-now">
+        <section>
+          <h3>Then</h3>
+          <ul id="card-then"></ul>
+        </section>
+        <section>
+          <h3>Now</h3>
+          <p id="card-now"></p>
+        </section>
+      </div>
+      <h3 class="src-h">Sources</h3>
+      <ul class="sources" id="card-sources"></ul>
+    </article>
+  </dialog>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
