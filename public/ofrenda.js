@@ -1,7 +1,7 @@
 // The Ofrenda: a candle for each person from the fact sheet. Lit candles are remembered
 // in this browser only (localStorage), and the page works fine if that is unavailable.
 
-import { buildArch, ensureMarigoldSymbol, makeCandle, marigoldSvg, scatterPetals } from './decor.js';
+import { buildArch, cloneGhost, ensureMarigoldSymbol, makeCandle, marigoldSvg, scatterPetals } from './decor.js';
 
 const calm = window.matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -48,14 +48,7 @@ export function renderOfrenda(altar, countEl, people, { ghostBox, ghostSvg, than
     playing = true;
     const figure = ghostBox.querySelector('.ag-figure');
     const line = ghostBox.querySelector('.ag-line');
-    const copy = ghostSvg.cloneNode(true);
-    for (const node of copy.querySelectorAll('*')) {
-      if (node.id) node.id += '-altar';
-      const fill = node.getAttribute('fill');
-      if (fill && fill.startsWith('url(#')) node.setAttribute('fill', fill.replace(')', '-altar)'));
-      node.style.transform = '';
-    }
-    figure.replaceChildren(copy);
+    figure.replaceChildren(cloneGhost(ghostSvg, 'altar'));
     line.textContent = thanks || '';
     line.hidden = !thanks;
     ghostBox.hidden = false;

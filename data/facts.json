@@ -380,7 +380,7 @@
       ]
     }
   ],
-  "thanks": null,
+  "thanks": "Thank you, friend. Every candle is lit, and the people who came before are remembered tonight.",
   "quiz": {
     "title": "Remedy or Poison?",
     "prompt": "Which of these best describes what became of it?",
@@ -400,11 +400,32 @@
     ],
     "questions": [
       {
-        "id": "q-mercury",
-        "remedyId": "mercury",
-        "prompt": "Mercury teething powders?",
-        "answer": "dangerous",
-        "explanation": "Left behind. They caused pink disease in some babies."
+        "id": "q-willow",
+        "remedyId": "willow-bark",
+        "prompt": "Willow bark?",
+        "answer": "modern",
+        "explanation": "Became a modern medicine. Willow led to aspirin, a medicine with real risks."
+      },
+      {
+        "id": "q-cinchona",
+        "remedyId": "cinchona-quinine",
+        "prompt": "Cinchona bark?",
+        "answer": "modern",
+        "explanation": "Became a modern medicine. Quinine, isolated from the bark in 1820, led to modern antimalarial medicines."
+      },
+      {
+        "id": "q-foxglove",
+        "remedyId": "foxglove",
+        "prompt": "Foxglove?",
+        "answer": "both",
+        "explanation": "Both. Foxglove is poisonous, and digitalis-derived heart medicines are still prescribed today."
+      },
+      {
+        "id": "q-laudanum",
+        "remedyId": "laudanum",
+        "prompt": "Laudanum?",
+        "answer": "both",
+        "explanation": "Both. Laudanum was poisonous and linked to addiction, and it led to morphine and today's tightly controlled opioid medicines."
       },
       {
         "id": "q-leeches",
@@ -414,12 +435,38 @@
         "explanation": "Both. They are now a cleared surgical device, but bloodletting is history."
       },
       {
+        "id": "q-mercury",
+        "remedyId": "mercury",
+        "prompt": "Mercury teething powders?",
+        "answer": "dangerous",
+        "explanation": "Left behind. They caused pink disease in some babies."
+      },
+      {
         "id": "q-arsenic",
         "remedyId": "arsenic",
         "prompt": "Arsenic?",
         "answer": "both",
         "explanation": "Both. Fowler's solution was dangerous, and arsenic trioxide is given only by specialists."
+      },
+      {
+        "id": "q-cod",
+        "remedyId": "cod-liver-oil",
+        "prompt": "Cod liver oil?",
+        "answer": "modern",
+        "explanation": "Became a modern medicine. It led to vitamin D and fortified milk, which greatly reduced rickets."
       }
     ]
+  },
+  "ghost": {
+    "name": "Ambrose Quill",
+    "refusals": {
+      "health": "That is a question for a doctor or a pharmacist, friend. I only know the old stories. Shall I tell you about willow bark, or the foxglove?",
+      "outside": "That is beyond my dusty shelves. I can speak only of the jars in this shop.",
+      "dose": "I never speak of doses or amounts, friend. Please ask a doctor or a pharmacist.",
+      "inject": "Hush now, friend. I can only tell the old stories from my shelves.",
+      "unavailable": "The candles are guttering, friend. The spirits are quiet just now. Please try again in a moment.",
+      "slow": "Slowly, friend. Let the candles breathe a moment.",
+      "short": "My old ears did not catch that. Could you say it shorter?"
+    }
   }
 }

@@ -7,6 +7,7 @@
   <meta name="description" content="A haunted, candlelit apothecary shop of old remedies and what they became. History, not medical advice.">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/rooms.css">
+  <link rel="stylesheet" href="/extras.css">
 </head>
 <body>
   <div class="glow" aria-hidden="true"></div>
@@ -24,6 +25,8 @@
       <a href="#/poison">Poison cabinet</a>
       <a href="#/ofrenda">Ofrenda</a>
       <a href="#/quiz">Quiz</a>
+      <a href="#/certificate" id="nav-cert">Certificate</a>
+      <a href="#/chat">Ask the ghost</a>
     </nav>
   </header>
 
@@ -129,6 +132,7 @@
         </div>
         <div class="altar" id="altar"></div>
       </div>
+      <section class="remember" id="remember" aria-label="Leave a remembrance"></section>
     </section>
 
     <section class="view" id="view-quiz" hidden aria-labelledby="quiz-title">
@@ -136,6 +140,20 @@
         <h2 id="quiz-title" tabindex="-1">Remedy or Poison?</h2>
         <p class="quiz-sub">Which of these best describes what became of it?</p>
         <div id="quiz-body"></div>
+      </div>
+    </section>
+
+    <section class="view" id="view-certificate" hidden aria-labelledby="cert-title">
+      <div class="cert-page">
+        <h2 id="cert-title" tabindex="-1">Certificate</h2>
+        <div id="cert-body"></div>
+      </div>
+    </section>
+
+    <section class="view" id="view-chat" hidden aria-labelledby="chat-title">
+      <div class="chat">
+        <h2 id="chat-title" tabindex="-1">Ask the ghost</h2>
+        <div id="chat-body"></div>
       </div>
     </section>
   </main>

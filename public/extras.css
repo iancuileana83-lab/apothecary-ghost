@@ -1,0 +1,181 @@
+/* The ghost chat, the certificate page and "Leave a remembrance". */
+
+main:not([data-view="shop"]) .moonbeam { display: none; }
+
+.nav a.nudge { color: #ffd9a0; border-color: var(--candle); animation: nudge 2.4s ease-in-out infinite; }
+@keyframes nudge {
+  0%, 100% { box-shadow: 0 0 4px rgba(255, 181, 74, 0.2); }
+  50% { box-shadow: 0 0 16px rgba(255, 181, 74, 0.65); }
+}
+
+/* ---------- ghost chat ---------- */
+
+.chat { max-width: 680px; margin: 26px auto 0; }
+.chat h2, .cert-page h2 {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(1.8rem, 5.5vw, 2.5rem);
+  font-weight: normal;
+  letter-spacing: 0.06em;
+  color: #cfeaff;
+  text-shadow: 0 0 18px rgba(150, 215, 255, 0.5);
+}
+.chat-top { display: flex; flex-direction: column; align-items: center; gap: 6px; margin: 8px 0 10px; }
+.chat-ghost { width: 96px; opacity: 0.85; }
+.chat-ghost svg { display: block; width: 100%; height: auto; filter: drop-shadow(0 0 14px rgba(150, 215, 255, 0.75)); }
+.chat-ghost.thinking svg { animation: think 1.4s ease-in-out infinite; }
+@keyframes think {
+  0%, 100% { filter: drop-shadow(0 0 10px rgba(150, 215, 255, 0.5)); }
+  50% { filter: drop-shadow(0 0 24px rgba(200, 240, 255, 1)); }
+}
+
+.chat-log {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: min(46vh, 380px);
+  overflow-y: auto;
+  padding: 14px;
+  border: 1px solid rgba(160, 215, 245, 0.3);
+  border-radius: 8px;
+  background: rgba(8, 12, 22, 0.78);
+  box-shadow: inset 0 0 36px rgba(0, 0, 0, 0.6);
+}
+.bubble {
+  max-width: 86%;
+  padding: 8px 14px;
+  border-radius: 14px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.bubble.ghost {
+  align-self: flex-start;
+  border: 1px solid rgba(160, 215, 245, 0.45);
+  background: rgba(16, 26, 44, 0.9);
+  color: #d5eefc;
+  font-style: italic;
+  text-shadow: 0 0 8px rgba(150, 215, 255, 0.4);
+}
+.bubble.visitor {
+  align-self: flex-end;
+  border: 1px solid rgba(255, 190, 90, 0.4);
+  background: rgba(60, 36, 18, 0.85);
+  color: var(--ink);
+}
+.bubble.thinking { color: var(--ink-dim); animation: think-text 1.6s ease-in-out infinite; }
+@keyframes think-text { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+
+.chat-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 10px 0; }
+.chip, .chat-ask, .chat-voice, .cert-write, .cert-download, .rem-place, .rem-remove {
+  all: unset;
+  box-sizing: border-box;
+  padding: 6px 14px;
+  border: 1px solid rgba(185, 169, 132, 0.55);
+  border-radius: 999px;
+  background: rgba(40, 24, 12, 0.7);
+  color: var(--ink);
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+.chip:hover, .chip:focus-visible, .chat-ask:hover, .chat-ask:focus-visible, .chat-voice:hover, .chat-voice:focus-visible,
+.cert-write:hover, .cert-write:focus-visible, .cert-download:hover, .cert-download:focus-visible,
+.rem-place:hover, .rem-place:focus-visible, .rem-remove:hover, .rem-remove:focus-visible {
+  border-color: var(--candle);
+  outline: none;
+  box-shadow: 0 0 10px rgba(255, 181, 74, 0.35);
+}
+.chat-ask:disabled { opacity: 0.5; cursor: default; }
+.chat-voice[aria-pressed="true"] { border-color: var(--candle); color: var(--candle); }
+
+.chat-form { display: flex; gap: 8px; }
+.chat-form input, .cert-form input, .rem-form input, .rem-form textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid rgba(185, 169, 132, 0.55);
+  border-radius: 8px;
+  background: rgba(14, 8, 5, 0.85);
+  color: var(--ink);
+  font: inherit;
+}
+.chat-form input { flex: 1; }
+.chat-form input:focus-visible, .cert-form input:focus-visible, .rem-form input:focus-visible, .rem-form textarea:focus-visible {
+  outline: 2px solid var(--candle);
+  outline-offset: 1px;
+}
+.chat-tools { display: flex; justify-content: center; margin-top: 10px; }
+
+/* ---------- certificate ---------- */
+
+.cert-page { max-width: 760px; margin: 26px auto 0; text-align: center; }
+.cert-page h2 { color: #ffd9a0; text-shadow: 0 0 18px rgba(255, 181, 74, 0.45); }
+.cert-locked, .cert-offer {
+  margin: 18px auto;
+  max-width: 560px;
+  padding: 12px 16px;
+  border: 1px solid rgba(255, 190, 90, 0.35);
+  border-radius: 8px;
+  background: rgba(14, 8, 5, 0.78);
+}
+.cert-offer {
+  border-color: rgba(160, 215, 245, 0.45);
+  background: rgba(8, 12, 22, 0.85);
+  color: #d5eefc;
+  font-style: italic;
+}
+.cert-form { display: grid; gap: 8px; max-width: 420px; margin: 0 auto 18px; text-align: left; }
+.cert-form .cert-write { justify-self: start; }
+.cert-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto 14px;
+  border-radius: 4px;
+  box-shadow: 0 0 30px rgba(255, 170, 60, 0.3), 0 14px 30px #000;
+}
+
+/* ---------- Leave a remembrance ---------- */
+
+.remember {
+  margin: 30px auto 0;
+  max-width: 640px;
+  padding: 18px 18px 20px;
+  border: 1px solid rgba(255, 190, 90, 0.3);
+  border-radius: 8px;
+  background: rgba(14, 8, 5, 0.78);
+}
+.rem-heading { margin: 0; font-size: 1.4rem; font-weight: normal; color: #ffd9a0; text-align: center; }
+.rem-help { margin: 4px 0 14px; text-align: center; font-style: italic; }
+.rem-form { display: grid; gap: 6px; }
+.rem-form label { font-size: 0.9rem; color: var(--ink-dim); }
+.rem-form textarea { resize: vertical; min-height: 56px; }
+.rem-place { justify-self: start; margin-top: 6px; }
+.rem-privacy { margin: 12px 0 0; font-size: 0.85rem; color: var(--ink-dim); }
+.rem-blocked { margin: 6px 0 0; font-size: 0.85rem; color: #ffb199; }
+.rem-blocked[hidden] { display: none; }
+.rem-list { margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.remembrance {
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 190, 90, 0.25);
+  border-radius: 6px;
+  background: rgba(30, 18, 10, 0.7);
+}
+.rem-candle { transform: scale(0.55); transform-origin: 50% 100%; margin: -16px -12px -2px; }
+.rem-text strong { color: #ffd9a0; font-weight: normal; }
+.rem-text p { margin: 2px 0 0; overflow-wrap: anywhere; }
+.rem-remove { font-size: 0.8rem; padding: 4px 10px; }
+
+@media (max-width: 640px) {
+  .chat-log { height: min(50vh, 360px); }
+  .bubble { max-width: 94%; }
+  .remembrance { grid-template-columns: 26px 1fr; }
+  .rem-remove { grid-column: 2; justify-self: start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav a.nudge, .chat-ghost.thinking svg, .bubble.thinking { animation: none; }
+}

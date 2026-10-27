@@ -1,9 +1,14 @@
 import { buildMotes, buildPapel, makeCandle, makeCobweb, scatterPetals } from './decor.js';
 import { createHaunt, prefersCalm } from './haunt.js';
+import { renderCertificate } from './certificate.js';
+import { initChat } from './chat.js';
 import { renderOfrenda } from './ofrenda.js';
+import { createProgress } from './progress.js';
+import { renderRemember } from './remember.js';
 import { renderQuiz } from './quiz.js';
 import { writeLines } from './quill.js';
 import { createAmbient } from './sound.js';
+import { CERTIFICATE } from './texts.js';
 
 const SKULL = `
   <g class="skull">
@@ -59,7 +64,9 @@ const haunt = createHaunt({
 });
 
 let greeting = '';
+let defaultGreeting = '';
 let guttered = null;
+let progress = null;
 let whisperTimer;
 
 function el(tag, props = {}, text) {
@@ -171,6 +178,7 @@ function makeShelf(remedies, warning) {
 }
 
 function openCard(remedy, warning) {
+  progress?.markOpened(remedy.id);
   document.getElementById('card-title').textContent = remedy.name;
   const warn = document.getElementById('card-warning');
   warn.hidden = !remedy.poison;
@@ -229,7 +237,7 @@ soundBtn.addEventListener('click', async () => {
 });
 
 // rooms: #/shop, #/poison, #/ofrenda
-const rooms = ['shop', 'poison', 'ofrenda', 'quiz'];
+const rooms = ['shop', 'poison', 'ofrenda', 'quiz', 'certificate', 'chat'];
 const main = document.getElementById('main');
 const navLinks = [...document.querySelectorAll('#nav a')];
 let firstRoute = true;
@@ -244,6 +252,10 @@ function route() {
     else a.removeAttribute('aria-current');
   }
   if (room === 'shop') haunt.measure();
+  if (room === 'certificate' && progress?.earned()) {
+    progress.markCertVisited();
+    settleOffer();
+  }
   if (!firstRoute) {
     window.scrollTo(0, 0);
     document.querySelector('#view-' + room + ' h2')?.focus({ preventScroll: true });
@@ -252,12 +264,22 @@ function route() {
 }
 window.addEventListener('hashchange', route);
 
+// Once the certificate is earned, the ghost's whisper offers it until the visitor has visited.
+const navCert = document.getElementById('nav-cert');
+function settleOffer() {
+  const pending = progress?.earned() && !progress.certVisited();
+  greeting = pending ? CERTIFICATE.offer : defaultGreeting;
+  whisper.textContent = greeting;
+  navCert.classList.toggle('nudge', !!pending);
+}
+
 async function init() {
   try {
     const res = await fetch('/api/facts');
     if (!res.ok) throw new Error(res.status);
     const facts = await res.json();
-    greeting = facts.greeting;
+    defaultGreeting = facts.greeting;
+    greeting = defaultGreeting;
     whisper.textContent = greeting;
     whisper.classList.add('on');
     const half = Math.ceil(facts.remedies.length / 2);
@@ -278,8 +300,20 @@ async function init() {
       thanks: facts.thanks,
     });
 
+    progress = createProgress(facts.remedies.map((r) => r.id));
+    progress.onChange(settleOffer);
+    settleOffer();
+    renderCertificate(document.getElementById('cert-body'), progress);
+    renderRemember(document.getElementById('remember'));
+
     const byId = Object.fromEntries(facts.remedies.map((r) => [r.id, r]));
-    renderQuiz(document.getElementById('quiz-body'), facts.quiz, (id) => openCard(byId[id], facts.poisonWarning));
+    renderQuiz(
+      document.getElementById('quiz-body'),
+      facts.quiz,
+      (id) => openCard(byId[id], facts.poisonWarning),
+      () => progress.markQuizDone(),
+    );
+    initChat({ root: document.getElementById('chat-body'), facts, ghostSvg: ghost.querySelector('svg') });
   } catch {
     shop.replaceChildren(el('p', { className: 'loading' }, 'The shelves are dark. Please reload the page.'));
   }

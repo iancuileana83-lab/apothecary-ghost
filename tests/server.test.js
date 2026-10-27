@@ -66,6 +66,15 @@ test('the rooms are wired: nav, Poison cabinet and Ofrenda', async () => {
   }
 });
 
+test('chat, certificate and remembrance pieces are served', async () => {
+  const html = await (await fetch(base + '/')).text();
+  for (const hash of ['#/certificate', '#/chat']) assert.ok(html.includes(`href="${hash}"`), hash);
+  for (const id of ['chat-body', 'cert-body', 'remember']) assert.ok(html.includes(`id="${id}"`), id);
+  for (const file of ['/chat.js', '/certificate.js', '/remember.js', '/progress.js', '/texts.js', '/extras.css']) {
+    assert.equal((await fetch(base + file)).status, 200, file);
+  }
+});
+
 test('quiz room and its script are served', async () => {
   const html = await (await fetch(base + '/')).text();
   assert.ok(html.includes('href="#/quiz"'));

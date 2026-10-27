@@ -11,7 +11,7 @@ export function scoreMessage(score, total) {
   return `You scored ${score} of ${total}.`;
 }
 
-export function renderQuiz(body, quiz, openHistory) {
+export function renderQuiz(body, quiz, openHistory, onFinish = () => {}) {
   const { questions, options } = quiz;
   let index = 0;
   let score = 0;
@@ -67,6 +67,7 @@ export function renderQuiz(body, quiz, openHistory) {
   }
 
   function showScore() {
+    onFinish(score);
     const wrap = el('div', 'q');
     const again = el('button', 'q-next', 'Play again');
     again.type = 'button';

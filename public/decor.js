@@ -133,3 +133,15 @@ export function buildArch(container) {
   flowers(24, 0.9, 26, 38);
   container.innerHTML = `<svg viewBox="0 0 1000 190" preserveAspectRatio="xMidYMax meet" focusable="false">${out.join('')}</svg>`;
 }
+
+// A copy of the ghost SVG for another page. Ids are suffixed so its gradient does not clash.
+export function cloneGhost(svg, suffix) {
+  const copy = svg.cloneNode(true);
+  for (const node of copy.querySelectorAll('*')) {
+    if (node.id) node.id += `-${suffix}`;
+    const fill = node.getAttribute('fill');
+    if (fill && fill.startsWith('url(#')) node.setAttribute('fill', fill.replace(')', `-${suffix})`));
+    node.style.transform = '';
+  }
+  return copy;
+}
