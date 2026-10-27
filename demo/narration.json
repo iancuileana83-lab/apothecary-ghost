@@ -1,0 +1,61 @@
+{
+  "segments": [
+    {
+      "id": "s01",
+      "text": "In an old apothecary shop on Candlewick Lane, a ghost still keeps the shelves. This is The Apothecary's Ghost, my entry for the Ghost in the Machine challenge."
+    },
+    {
+      "id": "s02",
+      "text": "Ambrose Quill is a made-up character. He drifts through the shop, his eyes follow your mouse, and when you hover a jar, he whispers a line of history."
+    },
+    {
+      "id": "s03",
+      "text": "Open a jar and a Then and now card writes itself out, with its sources. Willow bark became aspirin. Every card says: history, not medical advice."
+    },
+    {
+      "id": "s04",
+      "text": "The dangerous remedies carry a wax seal and a skull. Hover one, and the ghost turns sickly green while the nearest candle gutters out."
+    },
+    {
+      "id": "s05",
+      "text": "The poison cabinet keeps foxglove, laudanum, mercury and arsenic behind glass, with a plain warning: never try any of them."
+    },
+    {
+      "id": "s06",
+      "say": "The Oh-fren-da honours ten real people from pharmacy history. Light a candle for each, and a marigold blooms beside them. Light all ten, and Ambrose thanks you.",
+      "text": "The Ofrenda honours ten real people from pharmacy history. Light a candle for each, and a marigold blooms beside them. Light all ten, and Ambrose thanks you."
+    },
+    {
+      "id": "s07",
+      "text": "A quiz called Remedy or Poison asks what each remedy became, using only the checked fact sheet."
+    },
+    {
+      "id": "s08",
+      "text": "The ghost chat uses Gemma, an open-weight model, hosted through the Gemini API, so nothing heavy runs on my laptop."
+    },
+    {
+      "id": "s08b",
+      "text": "Behind the scenes, the server gives Gemma the fact sheet, checks every question and every answer, and keeps my API key off the page."
+    },
+    {
+      "id": "s09",
+      "text": "Ask who Edward Stone was, and he answers in a few short sentences, only from the fact sheet."
+    },
+    {
+      "id": "s10",
+      "text": "Ask what to take for a headache, and he refuses, and sends you to a doctor or a pharmacist. He never gives doses and never recommends a remedy."
+    },
+    {
+      "id": "s11",
+      "text": "Open every jar and finish the quiz, and the ghost writes you an Apprentice Apothecary certificate, with a wax seal, ready to download."
+    },
+    {
+      "id": "s12",
+      "text": "It works on a phone too, it respects reduced motion, and everything you light or write stays in your browser."
+    },
+    {
+      "id": "s13",
+      "text": "The code is open source under the MIT license. Gemma's open weights made this possible, and the ghost never leaves the fact sheet. History, not medical advice."
+    }
+  ]
+}

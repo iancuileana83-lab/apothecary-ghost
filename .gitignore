@@ -2,3 +2,13 @@
 .env.*
 !.env.example
 node_modules/
+
+# demo video work files (the finished video is kept locally, not in git)
+demo/rec/
+demo/audio/
+demo/seg/
+demo/caps/
+demo/check/
+demo/shots/
+demo/list.txt
+demo/*.mp4

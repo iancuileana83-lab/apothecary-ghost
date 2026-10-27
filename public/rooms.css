@@ -180,7 +180,8 @@ main[data-view="poison"] .moonbeam, main[data-view="ofrenda"] .moonbeam { displa
   opacity: 0;
   transition: opacity 3s ease-in-out;
 }
-.altar-ghost.shown { opacity: 0.85; }
+.altar-ghost.shown { opacity: 1; }
+.ag-figure { opacity: 0.85; }
 .altar-ghost[hidden] { display: none; }
 .ag-figure svg {
   display: block;
@@ -198,7 +199,7 @@ main[data-view="poison"] .moonbeam, main[data-view="ofrenda"] .moonbeam { displa
   transform: translateX(-50%);
   border: 1px solid rgba(160, 215, 245, 0.45);
   border-radius: 14px;
-  background: rgba(8, 12, 22, 0.85);
+  background: rgb(8, 12, 22);
   color: #d5eefc;
   font-style: italic;
   text-align: center;

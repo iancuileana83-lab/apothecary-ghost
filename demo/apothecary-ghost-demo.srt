@@ -1,0 +1,147 @@
+1
+00:00:00,000 --> 00:00:04,339
+In an old apothecary shop on Candlewick Lane, a ghost still
+keeps the shelves.
+
+2
+00:00:04,339 --> 00:00:09,389
+This is The Apothecary's Ghost, my entry for the Ghost in
+the Machine challenge.
+
+3
+00:00:09,389 --> 00:00:11,513
+Ambrose Quill is a made-up character.
+
+4
+00:00:11,513 --> 00:00:16,165
+He drifts through the shop, his eyes follow your mouse, and
+when you hover a jar,
+
+5
+00:00:16,165 --> 00:00:18,487
+he whispers a line of history.
+
+6
+00:00:18,487 --> 00:00:23,208
+Open a jar and a Then and now card writes itself out, with
+its sources.
+
+7
+00:00:23,208 --> 00:00:25,004
+Willow bark became aspirin.
+
+8
+00:00:25,004 --> 00:00:28,596
+Every card says: history, not medical advice.
+
+9
+00:00:28,596 --> 00:00:31,483
+The dangerous remedies carry a wax seal and a skull.
+
+10
+00:00:31,483 --> 00:00:36,580
+Hover one, and the ghost turns sickly green while the
+nearest candle gutters out.
+
+11
+00:00:36,580 --> 00:00:41,434
+The poison cabinet keeps foxglove, laudanum, mercury and
+arsenic behind glass,
+
+12
+00:00:41,434 --> 00:00:44,773
+with a plain warning: never try any of them.
+
+13
+00:00:44,773 --> 00:00:48,209
+The Ofrenda honours ten real people from pharmacy history.
+
+14
+00:00:48,209 --> 00:00:51,705
+Light a candle for each, and a marigold blooms beside them.
+
+15
+00:00:51,705 --> 00:00:54,556
+Light all ten, and Ambrose thanks you.
+
+16
+00:00:54,556 --> 00:00:58,061
+A quiz called Remedy or Poison asks what each remedy became,
+
+17
+00:00:58,061 --> 00:01:00,648
+using only the checked fact sheet.
+
+18
+00:01:00,648 --> 00:01:05,387
+The ghost chat uses Gemma, an open-weight model, hosted
+through the Gemini API,
+
+19
+00:01:05,387 --> 00:01:08,086
+so nothing heavy runs on my laptop.
+
+20
+00:01:08,086 --> 00:01:11,359
+Behind the scenes, the server gives Gemma the fact sheet,
+
+21
+00:01:11,359 --> 00:01:16,209
+checks every question and every answer, and keeps my API key
+off the page.
+
+22
+00:01:16,209 --> 00:01:20,015
+Ask who Edward Stone was, and he answers in a few short
+sentences,
+
+23
+00:01:20,015 --> 00:01:22,057
+only from the fact sheet.
+
+24
+00:01:22,057 --> 00:01:24,875
+Ask what to take for a headache, and he refuses,
+
+25
+00:01:24,875 --> 00:01:27,341
+and sends you to a doctor or a pharmacist.
+
+26
+00:01:27,341 --> 00:01:30,935
+He never gives doses and never recommends a remedy.
+
+27
+00:01:30,935 --> 00:01:32,859
+Open every jar and finish the quiz,
+
+28
+00:01:32,859 --> 00:01:37,202
+and the ghost writes you an Apprentice Apothecary
+certificate, with a wax seal,
+
+29
+00:01:37,202 --> 00:01:38,791
+ready to download.
+
+30
+00:01:38,791 --> 00:01:41,838
+It works on a phone too, it respects reduced motion,
+
+31
+00:01:41,838 --> 00:01:45,719
+and everything you light or write stays in your browser.
+
+32
+00:01:45,719 --> 00:01:48,549
+The code is open source under the MIT license.
+
+33
+00:01:48,549 --> 00:01:53,655
+Gemma's open weights made this possible, and the ghost never
+leaves the fact sheet.
+
+34
+00:01:53,655 --> 00:01:55,978
+History, not medical advice.
+
