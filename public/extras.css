@@ -48,7 +48,7 @@ main:not([data-view="shop"]) .moonbeam { display: none; }
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
-.bubble.ghost {
+.bubble.from-ghost {
   align-self: flex-start;
   border: 1px solid rgba(160, 215, 245, 0.45);
   background: rgba(16, 26, 44, 0.9);

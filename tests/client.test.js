@@ -128,6 +128,14 @@ test('privacy: the remembrance, certificate and progress code never send anythin
   }
 });
 
+test('chat bubbles never reuse the shop ghost\'s "ghost" class (it floats absolutely)', () => {
+  const chat = readFileSync(new URL('../public/chat.js', import.meta.url), 'utf8');
+  const css = readFileSync(new URL('../public/extras.css', import.meta.url), 'utf8');
+  assert.ok(!/addBubble\('ghost/.test(chat));
+  assert.ok(!/\.bubble\.ghost\b/.test(css));
+  assert.match(chat, /addBubble\('from-ghost'/);
+});
+
 test('text wraps to the width it is given', () => {
   const measure = (s) => s.length * 10;
   const lines = wrapText(measure, 'one two three four five six', 100);

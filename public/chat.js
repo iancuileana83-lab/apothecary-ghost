@@ -118,7 +118,7 @@ export function initChat({ root, facts, ghostSvg }) {
   }
 
   async function ghostSays(text) {
-    const bubble = addBubble('ghost', '');
+    const bubble = addBubble('from-ghost', '');
     speak(text);
     await typeInto(bubble, text);
   }
@@ -131,7 +131,7 @@ export function initChat({ root, facts, ghostSvg }) {
     input.value = '';
     ask.disabled = true;
     addBubble('visitor', message);
-    const thinking = addBubble('ghost thinking', T.thinking);
+    const thinking = addBubble('from-ghost thinking', T.thinking);
     figure.classList.add('thinking');
 
     let result;
