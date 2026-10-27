@@ -1,0 +1,152 @@
+/* Phase 2: the Poison cabinet and the Ofrenda, plus the room navigation. */
+
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.view[hidden] { display: none; }
+main[data-view="poison"] .moonbeam, main[data-view="ofrenda"] .moonbeam { display: none; }
+.view h2:focus { outline: none; }
+
+.nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 14px 0 4px; }
+.nav a {
+  padding: 5px 14px;
+  border: 1px solid rgba(185, 169, 132, 0.5);
+  border-radius: 999px;
+  color: var(--ink-dim);
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  background: rgba(10, 6, 4, 0.55);
+}
+.nav a:hover, .nav a:focus-visible { color: var(--ink); border-color: var(--candle); outline: none; }
+.nav a[aria-current="page"] { color: #ffd9a0; border-color: var(--candle); box-shadow: 0 0 10px rgba(255, 181, 74, 0.3); }
+
+/* ---------- the Poison cabinet ---------- */
+
+.cabinet {
+  position: relative;
+  margin-top: 26px;
+  padding: 22px 20px 20px;
+  border: 14px solid var(--wood-light);
+  border-radius: 8px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(110, 255, 150, 0.1), transparent 60%),
+    linear-gradient(to bottom, #0b120d, #050806);
+  box-shadow: 0 0 0 2px #1a0f08, 0 0 36px rgba(100, 255, 150, 0.14), inset 0 0 60px rgba(0, 0, 0, 0.8);
+}
+.plaque {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.plaque svg { width: 38px; height: 38px; flex: none; }
+.plaque h2 {
+  margin: 0;
+  font-size: clamp(1.4rem, 4.5vw, 2rem);
+  font-weight: normal;
+  letter-spacing: 0.08em;
+  color: #e8dfc0;
+  text-shadow: 0 0 12px rgba(120, 255, 160, 0.4);
+}
+.cab-warning {
+  max-width: 620px;
+  margin: 0 auto 16px;
+  padding: 10px 14px;
+  border: 2px solid var(--blood);
+  border-radius: 4px;
+  background: rgba(179, 38, 30, 0.16);
+  color: #ffd2c9;
+  text-align: center;
+  font-weight: bold;
+}
+.cab-shelf { margin: 0; padding: 18px 8px 0; }
+.cab-hint { margin: 14px 0 0; text-align: center; color: var(--ink-dim); font-style: italic; font-size: 0.9rem; }
+.cab-glass {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0.07) 0, transparent 22%, transparent 70%, rgba(255, 255, 255, 0.05) 100%);
+}
+
+/* ---------- the Ofrenda ---------- */
+
+.altar-head { margin-top: 26px; text-align: center; }
+.altar-head h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 5.5vw, 2.6rem);
+  font-weight: normal;
+  letter-spacing: 0.1em;
+  color: #ffc23d;
+  text-shadow: 0 0 18px rgba(255, 170, 40, 0.5);
+}
+.altar-sub { margin: 4px 0; color: var(--ink); font-style: italic; }
+.altar-count { margin: 0 0 14px; color: var(--ink-dim); font-size: 0.9rem; }
+
+.altar {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  padding: 22px 14px 26px;
+  border-top: 10px solid #5a2f12;
+  border-bottom: 14px solid var(--wood-light);
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 150, 40, 0.07) 0 12px, transparent 12px 24px),
+    linear-gradient(to bottom, rgba(40, 18, 8, 0.85), rgba(14, 8, 5, 0.9));
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.7);
+}
+.altar > .petals { z-index: 0; }
+.person {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 10px 10px;
+  border: 1px solid rgba(255, 190, 90, 0.28);
+  border-radius: 6px;
+  background: rgba(14, 8, 5, 0.78);
+  text-align: center;
+  transition: box-shadow 0.6s ease, border-color 0.6s ease;
+}
+.person.glowing { border-color: rgba(255, 190, 90, 0.7); box-shadow: 0 0 22px rgba(255, 170, 60, 0.35); }
+.bust { width: 64px; }
+.bust svg { display: block; width: 100%; height: auto; }
+.person h3 { margin: 8px 0 4px; font-size: 1.02rem; font-weight: normal; color: #ffd9a0; }
+.bio { margin: 0 0 8px; font-size: 0.85rem; line-height: 1.4; }
+.p-sources { margin: 0 0 8px; padding: 0; list-style: none; font-size: 0.75rem; }
+.p-sources li { margin-bottom: 2px; }
+.p-sources a { color: var(--ink-dim); }
+.p-sources a:hover, .p-sources a:focus-visible { color: var(--ink); }
+
+.light {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: auto;
+  padding: 4px 8px 6px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.light:focus-visible { outline: 2px solid var(--candle); outline-offset: 2px; }
+.light .candle { transform: scale(0.85); transform-origin: 50% 100%; }
+.light-text { margin-top: 4px; font-size: 0.8rem; letter-spacing: 0.05em; color: var(--ink-dim); }
+.light[aria-pressed="true"] .light-text { color: var(--candle); }
+.candle.unlit .flame, .candle.unlit .halo { display: none; }
+
+@media (max-width: 900px) { .altar { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 640px) {
+  .altar { grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 16px 8px 20px; }
+  .cabinet { padding: 16px 10px 16px; border-width: 10px; }
+  .nav a { padding: 5px 10px; font-size: 0.82rem; }
+  .bio { font-size: 0.8rem; }
+}

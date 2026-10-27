@@ -55,3 +55,13 @@ test('sound is off by default and the ghost is labelled as made-up', async () =>
     assert.equal((await fetch(base + file)).status, 200, file);
   }
 });
+
+test('the rooms are wired: nav, Poison cabinet and Ofrenda', async () => {
+  const html = await (await fetch(base + '/')).text();
+  for (const hash of ['#/shop', '#/poison', '#/ofrenda']) assert.ok(html.includes(`href="${hash}"`), hash);
+  assert.match(html, /id="cabinet-jars"/);
+  assert.match(html, /id="altar"/);
+  for (const file of ['/rooms.css', '/ofrenda.js']) {
+    assert.equal((await fetch(base + file)).status, 200, file);
+  }
+});

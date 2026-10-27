@@ -1,5 +1,6 @@
 import { buildMotes, buildPapel, makeCandle, makeCobweb, scatterPetals } from './decor.js';
 import { createHaunt, prefersCalm } from './haunt.js';
+import { renderOfrenda } from './ofrenda.js';
 import { writeLines } from './quill.js';
 import { createAmbient } from './sound.js';
 
@@ -124,7 +125,8 @@ function overPoison(jar, over) {
   }
 }
 
-function makeJar(remedy, warning) {
+// ghostly jars make the ghost whisper and react; the Poison cabinet's jars just open their card
+function makeJar(remedy, warning, { ghostly = true } = {}) {
   const btn = el('button', { type: 'button', className: 'jar' });
   btn.setAttribute('aria-label', remedy.name + (remedy.poison ? '. ' + warning : ''));
   btn.style.setProperty('--jar', remedy.jar.color);
@@ -140,10 +142,12 @@ function makeJar(remedy, warning) {
     sayGreeting();
     if (remedy.poison) overPoison(btn, false);
   };
-  btn.addEventListener('pointerenter', enter);
-  btn.addEventListener('focus', enter);
-  btn.addEventListener('pointerleave', leave);
-  btn.addEventListener('blur', leave);
+  if (ghostly) {
+    btn.addEventListener('pointerenter', enter);
+    btn.addEventListener('focus', enter);
+    btn.addEventListener('pointerleave', leave);
+    btn.addEventListener('blur', leave);
+  }
   btn.addEventListener('click', () => openCard(remedy, warning));
   return btn;
 }
@@ -223,6 +227,30 @@ soundBtn.addEventListener('click', async () => {
   }
 });
 
+// rooms: #/shop, #/poison, #/ofrenda
+const rooms = ['shop', 'poison', 'ofrenda'];
+const main = document.getElementById('main');
+const navLinks = [...document.querySelectorAll('#nav a')];
+let firstRoute = true;
+
+function route() {
+  const name = (location.hash.match(/^#\/(\w+)/) || [])[1];
+  const room = rooms.includes(name) ? name : 'shop';
+  main.dataset.view = room;
+  for (const r of rooms) document.getElementById('view-' + r).hidden = r !== room;
+  for (const a of navLinks) {
+    if (a.getAttribute('href') === '#/' + room) a.setAttribute('aria-current', 'page');
+    else a.removeAttribute('aria-current');
+  }
+  if (room === 'shop') haunt.measure();
+  if (!firstRoute) {
+    window.scrollTo(0, 0);
+    document.querySelector('#view-' + room + ' h2')?.focus({ preventScroll: true });
+  }
+  firstRoute = false;
+}
+window.addEventListener('hashchange', route);
+
 async function init() {
   try {
     const res = await fetch('/api/facts');
@@ -238,9 +266,16 @@ async function init() {
     );
     haunt.setJars([...shop.querySelectorAll('.jar')]);
     haunt.start();
+
+    document.getElementById('cabinet-warning').textContent = facts.cabinetWarning;
+    document.getElementById('cabinet-jars').replaceChildren(
+      ...facts.remedies.filter((r) => r.poison).map((r) => makeJar(r, facts.poisonWarning, { ghostly: false })),
+    );
+    renderOfrenda(document.getElementById('altar'), document.getElementById('candle-count'), facts.people);
   } catch {
     shop.replaceChildren(el('p', { className: 'loading' }, 'The shelves are dark. Please reload the page.'));
   }
 }
 
+route();
 init();

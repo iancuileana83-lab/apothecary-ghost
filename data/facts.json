@@ -234,5 +234,150 @@
       ]
     }
   ],
-  "greeting": "Welcome, traveller. Mind the candles. Which jar shall we open?"
+  "greeting": "Welcome, traveller. Mind the candles. Which jar shall we open?",
+  "cabinetWarning": "These remedies were poisonous, and some harmed or killed the people who trusted them. Never try any of them. This is history, not medical advice.",
+  "people": [
+    {
+      "id": "stone",
+      "name": "Edward Stone",
+      "bio": "English clergyman whose 1763 letter to the Royal Society on willow bark is the first modern scientific description of its use.",
+      "sources": [
+        {
+          "title": "Aspirin: The Story of a Wonder Drug (BMJ, via PMC)",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC535471/"
+        },
+        {
+          "title": "The Story of Aspirin (National Library of Medicine)",
+          "url": "https://www.nlm.nih.gov/exhibition/the-story-of-aspirin/index.html"
+        }
+      ]
+    },
+    {
+      "id": "sydenham",
+      "name": "Thomas Sydenham",
+      "bio": "English physician, credited with bringing laudanum into medical practice. His Observationes Medicae (1676) was a standard textbook for two centuries.",
+      "sources": [
+        {
+          "title": "Thomas Sydenham (Britannica)",
+          "url": "https://www.britannica.com/biography/Thomas-Sydenham"
+        }
+      ]
+    },
+    {
+      "id": "withering",
+      "name": "William Withering",
+      "bio": "English physician. After a folk remedy led him to foxglove, he studied it for about ten years and published An Account of the Foxglove in 1785, including its toxic effects.",
+      "sources": [
+        {
+          "title": "An Account of the Fox Glove (PMC)",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5545334/"
+        },
+        {
+          "title": "William Withering (Linda Hall Library)",
+          "url": "https://www.lindahall.org/about/news/scientist-of-the-day/william-withering/"
+        }
+      ]
+    },
+    {
+      "id": "serturner",
+      "name": "Friedrich Sertürner",
+      "bio": "German pharmacist who isolated morphine around 1804.",
+      "sources": [
+        {
+          "title": "Friedrich Sertürner (Britannica)",
+          "url": "https://www.britannica.com/biography/Friedrich-Serturner"
+        }
+      ]
+    },
+    {
+      "id": "pelletier",
+      "name": "Pierre-Joseph Pelletier",
+      "bio": "French pharmacist who, with Joseph Caventou, isolated quinine from cinchona bark in 1820.",
+      "sources": [
+        {
+          "title": "Pierre-Joseph Pelletier (Britannica)",
+          "url": "https://www.britannica.com/biography/Pierre-Joseph-Pelletier"
+        },
+        {
+          "title": "Natural Products That Changed Society (PMC)",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8146924/"
+        }
+      ]
+    },
+    {
+      "id": "caventou",
+      "name": "Joseph Caventou",
+      "bio": "French pharmacist who, with Pierre-Joseph Pelletier, isolated quinine from cinchona bark in 1820.",
+      "sources": [
+        {
+          "title": "Natural Products That Changed Society (PMC)",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8146924/"
+        },
+        {
+          "title": "Malarial Subjects (NCBI Bookshelf)",
+          "url": "https://www.ncbi.nlm.nih.gov/books/n/wt605891/ch1/"
+        }
+      ]
+    },
+    {
+      "id": "hoffmann",
+      "name": "Felix Hoffmann",
+      "bio": "Bayer chemist, usually credited with making aspirin in 1897.",
+      "sources": [
+        {
+          "title": "Felix Hoffmann (Science History Institute)",
+          "url": "https://www.sciencehistory.org/education/scientific-biographies/felix-hoffmann/"
+        },
+        {
+          "title": "Aspirin: The Story of a Wonder Drug (BMJ, via PMC)",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC535471/"
+        }
+      ]
+    },
+    {
+      "id": "eichengrun",
+      "name": "Arthur Eichengrün",
+      "bio": "Bayer chemist. Historians say he played a significant role in making aspirin, and that his part was left out of the story told from the 1930s.",
+      "sources": [
+        {
+          "title": "Aspirin: The Story of a Wonder Drug (BMJ, via PMC)",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC535471/"
+        },
+        {
+          "title": "\"Bayer works wonders\": the invention of aspirin (Science Museum)",
+          "url": "https://blog.sciencemuseum.org.uk/bayer-works-wonders-invention-aspirin/"
+        }
+      ]
+    },
+    {
+      "id": "ehrlich",
+      "name": "Paul Ehrlich",
+      "bio": "Developed Salvarsan, an arsenic compound for syphilis, in 1910.",
+      "sources": [
+        {
+          "title": "Resurrection of Oral Arsenic Trioxide for APL (PMC)",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7418518/"
+        },
+        {
+          "title": "The history of arsenic trioxide in cancer therapy (PubMed)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/11331433/"
+        }
+      ]
+    },
+    {
+      "id": "windaus",
+      "name": "Adolf Windaus",
+      "bio": "Won the 1928 Nobel Prize in Chemistry for research on sterols and their link with the vitamins.",
+      "sources": [
+        {
+          "title": "Adolf Windaus, Nobel Prize in Chemistry 1928",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1928/windaus/facts/"
+        },
+        {
+          "title": "Adolf Windaus (Britannica)",
+          "url": "https://www.britannica.com/biography/Adolf-Windaus"
+        }
+      ]
+    }
+  ]
 }

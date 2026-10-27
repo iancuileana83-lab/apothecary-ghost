@@ -60,3 +60,27 @@ test('every jar has a Latin label and the ghost has the approved greeting', () =
   assert.equal(label('foxglove'), 'Folia Digitalis');
   assert.equal(facts.greeting, 'Welcome, traveller. Mind the candles. Which jar shall we open?');
 });
+
+test('the Ofrenda honours the ten approved people, each with a bio and sources', () => {
+  assert.deepEqual(
+    facts.people.map((p) => p.id),
+    ['stone', 'sydenham', 'withering', 'serturner', 'pelletier', 'caventou', 'hoffmann', 'eichengrun', 'ehrlich', 'windaus'],
+  );
+  for (const p of facts.people) {
+    assert.ok(p.bio.length > 20, `${p.id} bio`);
+    assert.ok(p.sources.length >= 1, `${p.id} sources`);
+    for (const s of p.sources) {
+      assert.match(s.url, /^https:\/\//, `${p.id} source url`);
+      assert.ok(!/wikipedia/i.test(s.url), `${p.id} cites Wikipedia`);
+    }
+  }
+  const eich = facts.people.find((p) => p.id === 'eichengrun');
+  assert.match(eich.bio, /left out of the story told from the 1930s/);
+});
+
+test('the Poison cabinet carries the approved warning', () => {
+  assert.equal(
+    facts.cabinetWarning,
+    'These remedies were poisonous, and some harmed or killed the people who trusted them. Never try any of them. This is history, not medical advice.',
+  );
+});

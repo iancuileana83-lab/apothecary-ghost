@@ -171,7 +171,7 @@ export function createHaunt({ ghost, scene, windowEl }) {
   window.addEventListener('resize', measure);
   calm.addEventListener('change', () => (calm.matches ? stop() : start()));
 
-  return { start, setJars };
+  return { start, setJars, measure };
 }
 
 export const prefersCalm = () => calm.matches;
