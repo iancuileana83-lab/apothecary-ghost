@@ -23,6 +23,7 @@
       <a href="#/shop">The shop</a>
       <a href="#/poison">Poison cabinet</a>
       <a href="#/ofrenda">Ofrenda</a>
+      <a href="#/quiz">Quiz</a>
     </nav>
   </header>
 
@@ -120,7 +121,22 @@
         <p class="altar-sub">For the people who came before.</p>
         <p class="altar-count" id="candle-count" aria-live="polite"></p>
       </div>
-      <div class="altar" id="altar"></div>
+      <div class="altar-wrap">
+        <div class="arch" id="arch" aria-hidden="true"></div>
+        <div class="altar-ghost" id="altar-ghost" hidden>
+          <div class="ag-figure" aria-hidden="true"></div>
+          <p class="ag-line" id="altar-line" aria-live="polite"></p>
+        </div>
+        <div class="altar" id="altar"></div>
+      </div>
+    </section>
+
+    <section class="view" id="view-quiz" hidden aria-labelledby="quiz-title">
+      <div class="quiz">
+        <h2 id="quiz-title" tabindex="-1">Remedy or Poison?</h2>
+        <p class="quiz-sub">Which of these best describes what became of it?</p>
+        <div id="quiz-body"></div>
+      </div>
     </section>
   </main>
 

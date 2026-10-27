@@ -1,7 +1,9 @@
 // The Ofrenda: a candle for each person from the fact sheet. Lit candles are remembered
 // in this browser only (localStorage), and the page works fine if that is unavailable.
 
-import { makeCandle, scatterPetals } from './decor.js';
+import { buildArch, ensureMarigoldSymbol, makeCandle, marigoldSvg, scatterPetals } from './decor.js';
+
+const calm = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 const KEY = 'apothecary-ghost:candles';
 
@@ -34,8 +36,36 @@ function el(tag, className, text) {
   return node;
 }
 
-export function renderOfrenda(altar, countEl, people) {
+export function renderOfrenda(altar, countEl, people, { ghostBox, ghostSvg, thanks } = {}) {
   const lit = loadLit();
+  ensureMarigoldSymbol();
+  buildArch(document.getElementById('arch'));
+  let playing = false;
+
+  // when every candle is lit, Ambrose fades in above the altar, says his thanks, and fades away
+  const playThanks = () => {
+    if (playing || !ghostBox) return;
+    playing = true;
+    const figure = ghostBox.querySelector('.ag-figure');
+    const line = ghostBox.querySelector('.ag-line');
+    const copy = ghostSvg.cloneNode(true);
+    for (const node of copy.querySelectorAll('*')) {
+      if (node.id) node.id += '-altar';
+      const fill = node.getAttribute('fill');
+      if (fill && fill.startsWith('url(#')) node.setAttribute('fill', fill.replace(')', '-altar)'));
+      node.style.transform = '';
+    }
+    figure.replaceChildren(copy);
+    line.textContent = thanks || '';
+    line.hidden = !thanks;
+    ghostBox.hidden = false;
+    requestAnimationFrame(() => requestAnimationFrame(() => ghostBox.classList.add('shown')));
+    setTimeout(() => ghostBox.classList.remove('shown'), calm.matches ? 8000 : 9500);
+    setTimeout(() => {
+      ghostBox.hidden = true;
+      playing = false;
+    }, calm.matches ? 8200 : 13000);
+  };
 
   const updateCount = () => {
     countEl.textContent = `${lit.size} of ${people.length} candles lit`;
@@ -44,8 +74,9 @@ export function renderOfrenda(altar, countEl, people) {
   altar.replaceChildren(
     ...people.map((p) => {
       const card = el('article', 'person');
-      card.append(el('div', 'bust'), el('h3', '', p.name), el('p', 'bio', p.bio));
-      card.firstChild.innerHTML = BUST;
+      const bust = el('div', 'bust');
+      bust.innerHTML = BUST + marigoldSvg('marigold-beside');
+      card.append(bust, el('h3', '', p.name), el('p', 'bio', p.bio));
 
       const sources = el('ul', 'p-sources');
       for (const s of p.sources) {
@@ -79,6 +110,7 @@ export function renderOfrenda(altar, countEl, people) {
         saveLit(lit);
         paint();
         updateCount();
+        if (lit.size === people.length) playThanks();
       });
       paint();
       card.append(button);

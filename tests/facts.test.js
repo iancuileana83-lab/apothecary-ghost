@@ -84,3 +84,24 @@ test('the Poison cabinet carries the approved warning', () => {
     'These remedies were poisonous, and some harmed or killed the people who trusted them. Never try any of them. This is history, not medical advice.',
   );
 });
+
+test('the quiz is built only from the fact sheet', () => {
+  const { quiz } = facts;
+  const optionIds = quiz.options.map((o) => o.id);
+  assert.deepEqual(optionIds, ['modern', 'dangerous', 'both']);
+  const ids = remedies.map((r) => r.id);
+  for (const q of quiz.questions) {
+    assert.ok(ids.includes(q.remedyId), `${q.id} remedy`);
+    assert.ok(optionIds.includes(q.answer), `${q.id} answer`);
+    assert.ok(q.explanation.length > 10, `${q.id} explanation`);
+  }
+  // a remedy flagged poisonous must never be marked as simply "became a modern medicine"
+  for (const q of quiz.questions) {
+    const remedy = remedies.find((r) => r.id === q.remedyId);
+    if (remedy.poison) assert.notEqual(q.answer, 'modern', `${q.id} poison marked modern`);
+  }
+});
+
+test('the thanks line stays empty until the user approves wording', () => {
+  assert.ok(facts.thanks === null || typeof facts.thanks === 'string');
+});

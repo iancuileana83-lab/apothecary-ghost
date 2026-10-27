@@ -379,5 +379,47 @@
         }
       ]
     }
-  ]
+  ],
+  "thanks": null,
+  "quiz": {
+    "title": "Remedy or Poison?",
+    "prompt": "Which of these best describes what became of it?",
+    "options": [
+      {
+        "id": "modern",
+        "label": "Became a modern medicine"
+      },
+      {
+        "id": "dangerous",
+        "label": "Left behind as dangerous"
+      },
+      {
+        "id": "both",
+        "label": "Both"
+      }
+    ],
+    "questions": [
+      {
+        "id": "q-mercury",
+        "remedyId": "mercury",
+        "prompt": "Mercury teething powders?",
+        "answer": "dangerous",
+        "explanation": "Left behind. They caused pink disease in some babies."
+      },
+      {
+        "id": "q-leeches",
+        "remedyId": "leeches",
+        "prompt": "Leeches?",
+        "answer": "both",
+        "explanation": "Both. They are now a cleared surgical device, but bloodletting is history."
+      },
+      {
+        "id": "q-arsenic",
+        "remedyId": "arsenic",
+        "prompt": "Arsenic?",
+        "answer": "both",
+        "explanation": "Both. Fowler's solution was dangerous, and arsenic trioxide is given only by specialists."
+      }
+    ]
+  }
 }

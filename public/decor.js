@@ -75,3 +75,61 @@ export function makeCobweb(side) {
   web.innerHTML = COBWEB;
   return web;
 }
+
+// One shared marigold drawing that other SVGs reference with <use href="#marigold">.
+export function ensureMarigoldSymbol() {
+  if (document.getElementById('marigold')) return;
+  const ring = (n, cy, rx, ry, fill, turn) =>
+    Array.from(
+      { length: n },
+      (_, i) =>
+        `<ellipse cx="0" cy="${-cy}" rx="${rx}" ry="${ry}" fill="${fill}" transform="rotate(${((i * 360) / n + turn).toFixed(1)})"/>`,
+    ).join('');
+  const holder = document.createElement('div');
+  holder.className = 'svg-defs';
+  holder.setAttribute('aria-hidden', 'true');
+  holder.innerHTML = `<svg width="0" height="0" focusable="false"><symbol id="marigold" viewBox="-20 -20 40 40">
+    ${ring(12, 10, 5, 8, '#f08c00', 0)}${ring(10, 7, 4.2, 6.5, '#ffa927', 18)}${ring(8, 4.5, 3.2, 4.8, '#ffc53d', 0)}
+    <circle r="2.6" fill="#e8590c"/></symbol></svg>`;
+  document.body.append(holder);
+}
+
+export function marigoldSvg(className) {
+  return `<svg class="${className}" viewBox="-20 -20 40 40" aria-hidden="true" focusable="false"><use href="#marigold"/></svg>`;
+}
+
+// An arch of marigolds and leaves, drawn along a half ellipse.
+export function buildArch(container) {
+  ensureMarigoldSymbol();
+  const cx = 500;
+  const cy = 186;
+  const rx = 468;
+  const ry = 158;
+  const at = (t, scale = 1) => ({
+    x: cx - Math.cos(Math.PI * t) * rx * scale,
+    y: cy - Math.sin(Math.PI * t) * ry * scale,
+    tangent: (Math.atan2(Math.cos(Math.PI * t) * ry * scale, Math.sin(Math.PI * t) * rx * scale) * 180) / Math.PI,
+  });
+  const out = [];
+  for (let i = 0; i <= 48; i++) {
+    const p = at(i / 48, rand(0.93, 1.03));
+    const green = rand(0, 1) < 0.5 ? '#2f6b3a' : '#3f8a4a';
+    out.push(
+      `<ellipse cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" rx="16" ry="6" fill="${green}" transform="rotate(${(p.tangent + rand(-40, 40)).toFixed(0)} ${p.x.toFixed(1)} ${p.y.toFixed(1)})"/>`,
+    );
+  }
+  const flowers = (count, scale, min, max) => {
+    for (let i = 0; i <= count; i++) {
+      const p = at(i / count, scale);
+      const size = rand(min, max);
+      const x = p.x + rand(-6, 6) - size / 2;
+      const y = p.y + rand(-6, 6) - size / 2;
+      out.push(
+        `<use href="#marigold" x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${size.toFixed(0)}" height="${size.toFixed(0)}" transform="rotate(${rand(0, 180).toFixed(0)} ${(x + size / 2).toFixed(1)} ${(y + size / 2).toFixed(1)})"/>`,
+      );
+    }
+  };
+  flowers(30, 1, 40, 56);
+  flowers(24, 0.9, 26, 38);
+  container.innerHTML = `<svg viewBox="0 0 1000 190" preserveAspectRatio="xMidYMax meet" focusable="false">${out.join('')}</svg>`;
+}

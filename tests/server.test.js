@@ -65,3 +65,11 @@ test('the rooms are wired: nav, Poison cabinet and Ofrenda', async () => {
     assert.equal((await fetch(base + file)).status, 200, file);
   }
 });
+
+test('quiz room and its script are served', async () => {
+  const html = await (await fetch(base + '/')).text();
+  assert.ok(html.includes('href="#/quiz"'));
+  assert.match(html, /id="quiz-body"/);
+  assert.match(html, /id="arch"/);
+  assert.equal((await fetch(base + '/quiz.js')).status, 200);
+});

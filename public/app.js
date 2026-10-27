@@ -1,6 +1,7 @@
 import { buildMotes, buildPapel, makeCandle, makeCobweb, scatterPetals } from './decor.js';
 import { createHaunt, prefersCalm } from './haunt.js';
 import { renderOfrenda } from './ofrenda.js';
+import { renderQuiz } from './quiz.js';
 import { writeLines } from './quill.js';
 import { createAmbient } from './sound.js';
 
@@ -228,7 +229,7 @@ soundBtn.addEventListener('click', async () => {
 });
 
 // rooms: #/shop, #/poison, #/ofrenda
-const rooms = ['shop', 'poison', 'ofrenda'];
+const rooms = ['shop', 'poison', 'ofrenda', 'quiz'];
 const main = document.getElementById('main');
 const navLinks = [...document.querySelectorAll('#nav a')];
 let firstRoute = true;
@@ -271,7 +272,14 @@ async function init() {
     document.getElementById('cabinet-jars').replaceChildren(
       ...facts.remedies.filter((r) => r.poison).map((r) => makeJar(r, facts.poisonWarning, { ghostly: false })),
     );
-    renderOfrenda(document.getElementById('altar'), document.getElementById('candle-count'), facts.people);
+    renderOfrenda(document.getElementById('altar'), document.getElementById('candle-count'), facts.people, {
+      ghostBox: document.getElementById('altar-ghost'),
+      ghostSvg: ghost.querySelector('svg'),
+      thanks: facts.thanks,
+    });
+
+    const byId = Object.fromEntries(facts.remedies.map((r) => [r.id, r]));
+    renderQuiz(document.getElementById('quiz-body'), facts.quiz, (id) => openCard(byId[id], facts.poisonWarning));
   } catch {
     shop.replaceChildren(el('p', { className: 'loading' }, 'The shelves are dark. Please reload the page.'));
   }
