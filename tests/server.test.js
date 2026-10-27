@@ -45,3 +45,13 @@ test('only GET is allowed and security headers are set', async () => {
   assert.match(res.headers.get('content-security-policy'), /default-src 'self'/);
   assert.equal(res.headers.get('x-content-type-options'), 'nosniff');
 });
+
+test('sound is off by default and the ghost is labelled as made-up', async () => {
+  const html = await (await fetch(base + '/')).text();
+  assert.match(html, /id="sound"[^>]*aria-pressed="false"/);
+  assert.match(html, /Sound: off/);
+  assert.match(html, /a made-up character/);
+  for (const file of ['/decor.js', '/sound.js']) {
+    assert.equal((await fetch(base + file)).status, 200, file);
+  }
+});

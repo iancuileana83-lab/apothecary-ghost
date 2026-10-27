@@ -50,3 +50,10 @@ test('approved corrections are in place', () => {
     for (const s of r.sources) assert.ok(!/wikipedia/i.test(s.url), `${r.id} cites Wikipedia`);
   }
 });
+
+test('every jar has a Latin label and the ghost has the approved greeting', () => {
+  for (const r of remedies) {
+    assert.match(r.jar.label, /^[A-Z][a-z]+( [A-Z][a-z]+)?$/, `${r.id} label`);
+  }
+  assert.equal(facts.greeting, 'Welcome, traveller. Mind the candles. Which jar shall we open?');
+});

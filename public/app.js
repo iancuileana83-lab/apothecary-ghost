@@ -1,14 +1,53 @@
-const JAR_SVG = `
+import { buildMotes, buildPapel, makeCandle, makeCobweb, scatterPetals } from './decor.js';
+import { createAmbient } from './sound.js';
+
+const SKULL = `
+  <g class="skull">
+    <path d="M39 108l22 12M61 108L39 120" stroke="#eadfc2" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="38" cy="107" r="2.2" fill="#eadfc2"/><circle cx="62" cy="107" r="2.2" fill="#eadfc2"/>
+    <circle cx="38" cy="121" r="2.2" fill="#eadfc2"/><circle cx="62" cy="121" r="2.2" fill="#eadfc2"/>
+    <circle cx="50" cy="107" r="7" fill="#eadfc2"/>
+    <rect x="46" y="111" width="8" height="5" rx="1.5" fill="#eadfc2"/>
+    <circle cx="47.2" cy="106.5" r="1.9" fill="#2b1d12"/><circle cx="52.8" cy="106.5" r="1.9" fill="#2b1d12"/>
+    <path d="M50 109.5l-1 2h2z" fill="#2b1d12"/>
+  </g>`;
+
+const WAX = `
+  <g class="wax-seal">
+    <rect x="29" y="2" width="42" height="19" rx="6"/>
+    <rect x="35" y="16" width="6" height="12" rx="3"/>
+    <rect x="56" y="16" width="6" height="15" rx="3"/>
+    <circle cx="38" cy="29" r="3.6"/><circle cx="59" cy="32" r="4"/>
+    <path class="wax-shine" d="M34 8h12" />
+  </g>`;
+
+function jarSvg(remedy) {
+  const words = remedy.jar.label.split(' ');
+  const longest = Math.max(...words.map((w) => w.length));
+  const size = Math.min(words.length > 1 ? 11 : 13, 58 / (longest * 0.56)).toFixed(1);
+  const ys = words.length > 1 ? [74, 87] : [80];
+  const lines = words
+    .map((w, i) => `<text x="50" y="${ys[i]}" font-size="${size}" text-anchor="middle">${w}</text>`)
+    .join('');
+  return `
 <svg viewBox="0 0 100 130" role="img" aria-hidden="true" focusable="false">
   <rect class="cork" x="34" y="4" width="32" height="14" rx="3"/>
   <path class="glass" d="M30 18h40v10c10 6 16 16 16 30v50c0 10-8 18-18 18H32c-10 0-18-8-18-18V58c0-14 6-24 16-30z"/>
   <path class="fill" d="M18 70h64v38c0 8-6 14-14 14H32c-8 0-14-6-14-14z"/>
-  <rect class="tag" x="28" y="62" width="44" height="30" rx="2"/>
+  <rect class="tag" x="19" y="60" width="62" height="35" rx="2"/>
+  <g class="tag-text">${lines}</g>
   <path class="shine" d="M24 48c0-8 4-12 8-15" />
+  ${remedy.poison ? SKULL + WAX : ''}
 </svg>`;
+}
 
 const shop = document.getElementById('shop');
 const card = document.getElementById('card');
+const whisper = document.getElementById('whisper');
+const ghost = document.getElementById('ghost');
+
+let greeting = '';
+let whisperTimer;
 
 function el(tag, props = {}, text) {
   const node = document.createElement(tag);
@@ -17,16 +56,61 @@ function el(tag, props = {}, text) {
   return node;
 }
 
+// The ghost only speaks wording from the approved fact sheet.
+function say(text) {
+  clearTimeout(whisperTimer);
+  whisper.textContent = text;
+  whisper.classList.add('on');
+  ghost.classList.add('listening');
+}
+
+function sayGreeting() {
+  whisperTimer = setTimeout(() => {
+    whisper.textContent = greeting;
+    ghost.classList.remove('listening');
+  }, 900);
+}
+
+function firstSentence(text) {
+  const match = text.match(/^.*?[.!?](?=\s|$)/);
+  return match ? match[0] : text;
+}
+
+function whisperFor(remedy, warning) {
+  return remedy.poison ? warning : firstSentence(remedy.then[0]);
+}
+
 function makeJar(remedy, warning) {
   const btn = el('button', { type: 'button', className: 'jar' });
   btn.setAttribute('aria-label', remedy.name + (remedy.poison ? '. ' + warning : ''));
   btn.style.setProperty('--jar', remedy.jar.color);
   btn.style.setProperty('--delay', (Math.random() * 4).toFixed(2) + 's');
-  btn.innerHTML = JAR_SVG;
-  btn.append(el('span', { className: 'jar-label' }, remedy.jar.label));
+  btn.innerHTML = jarSvg(remedy);
   if (remedy.poison) btn.classList.add('poison');
+  const line = whisperFor(remedy, warning);
+  btn.addEventListener('pointerenter', () => say(line));
+  btn.addEventListener('focus', () => say(line));
+  btn.addEventListener('pointerleave', sayGreeting);
+  btn.addEventListener('blur', sayGreeting);
   btn.addEventListener('click', () => openCard(remedy, warning));
   return btn;
+}
+
+function makeShelf(remedies, warning) {
+  const shelf = el('div', { className: 'shelf' });
+  const jars = el('div', { className: 'jars' });
+  jars.append(...remedies.map((r) => makeJar(r, warning)));
+  shelf.append(
+    makeCobweb('left'),
+    makeCobweb('right'),
+    makeCandle('shelf-candle left'),
+    makeCandle('shelf-candle right'),
+    jars,
+  );
+  const petals = el('div', { className: 'petals' });
+  scatterPetals(petals, 4);
+  shelf.append(petals);
+  return shelf;
 }
 
 function openCard(remedy, warning) {
@@ -34,11 +118,9 @@ function openCard(remedy, warning) {
   const warn = document.getElementById('card-warning');
   warn.hidden = !remedy.poison;
   warn.textContent = remedy.poison ? warning : '';
-  const then = document.getElementById('card-then');
-  then.replaceChildren(...remedy.then.map((t) => el('li', {}, t)));
+  document.getElementById('card-then').replaceChildren(...remedy.then.map((t) => el('li', {}, t)));
   document.getElementById('card-now').textContent = remedy.now;
-  const sources = document.getElementById('card-sources');
-  sources.replaceChildren(
+  document.getElementById('card-sources').replaceChildren(
     ...remedy.sources.map((s) => {
       const li = el('li');
       li.append(el('a', { href: s.url, target: '_blank', rel: 'noopener noreferrer' }, s.title));
@@ -53,18 +135,39 @@ card.addEventListener('click', (e) => {
   if (e.target === card) card.close();
 });
 
+// decor
+buildPapel(document.getElementById('papel'));
+buildMotes(document.getElementById('motes'));
+scatterPetals(document.getElementById('petals'), 16);
+const counter = document.querySelector('.counter');
+counter.append(makeCandle('counter-candle left'), makeCandle('counter-candle right'));
+
+// optional ambient sound, off until the visitor asks for it
+const ambient = createAmbient();
+const soundBtn = document.getElementById('sound');
+soundBtn.addEventListener('click', async () => {
+  try {
+    const on = await ambient.toggle();
+    soundBtn.setAttribute('aria-pressed', String(on));
+    soundBtn.textContent = on ? 'Sound: on' : 'Sound: off';
+  } catch {
+    soundBtn.disabled = true;
+    soundBtn.textContent = 'Sound unavailable';
+  }
+});
+
 async function init() {
   try {
     const res = await fetch('/api/facts');
     if (!res.ok) throw new Error(res.status);
     const facts = await res.json();
+    greeting = facts.greeting;
+    whisper.textContent = greeting;
+    whisper.classList.add('on');
     const half = Math.ceil(facts.remedies.length / 2);
     shop.replaceChildren(
-      ...[facts.remedies.slice(0, half), facts.remedies.slice(half)].map((row) => {
-        const shelf = el('div', { className: 'shelf' });
-        shelf.append(...row.map((r) => makeJar(r, facts.poisonWarning)));
-        return shelf;
-      }),
+      makeShelf(facts.remedies.slice(0, half), facts.poisonWarning),
+      makeShelf(facts.remedies.slice(half), facts.poisonWarning),
     );
   } catch {
     shop.replaceChildren(el('p', { className: 'loading' }, 'The shelves are dark. Please reload the page.'));

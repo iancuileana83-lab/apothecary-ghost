@@ -4,26 +4,90 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>The Apothecary's Ghost</title>
-  <meta name="description" content="A candlelit apothecary shop of old remedies and what they became. History, not medical advice.">
+  <meta name="description" content="A haunted, candlelit apothecary shop of old remedies and what they became. History, not medical advice.">
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <div class="glow" aria-hidden="true"></div>
+  <div class="motes" id="motes" aria-hidden="true"></div>
+
+  <button type="button" class="sound" id="sound" aria-pressed="false">Sound: off</button>
+
   <header class="top">
+    <div class="papel" id="papel" aria-hidden="true"></div>
     <h1>The Apothecary's Ghost</h1>
     <p class="tagline">Mind the candles. Choose a jar.</p>
     <p class="banner">History, not medical advice.</p>
   </header>
 
   <main>
+    <div class="moonbeam" aria-hidden="true"></div>
+
+    <section class="scene" aria-label="The apothecary counter">
+      <svg class="window" viewBox="0 0 120 170" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#2b3a68"/>
+            <stop offset="1" stop-color="#0f1530"/>
+          </linearGradient>
+        </defs>
+        <path d="M10 165V62C10 30 34 8 60 8s50 22 50 54v103z" fill="url(#sky)" stroke="#4a2f1c" stroke-width="8"/>
+        <circle cx="78" cy="48" r="15" fill="#f2f0dc"/>
+        <circle cx="85" cy="43" r="13" fill="#17204a"/>
+        <path d="M60 8v157M10 100h100" stroke="#4a2f1c" stroke-width="5"/>
+        <path d="M18 142c14-10 22 2 36-6s26 4 48-4" stroke="#0a0d1f" stroke-width="6" fill="none" opacity=".6"/>
+      </svg>
+
+      <div class="ghost" id="ghost">
+        <svg viewBox="0 0 200 250" role="img" aria-label="Ambrose Quill, the ghost apothecary (a made-up character)">
+          <defs>
+            <linearGradient id="spirit" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#d9f2ff" stop-opacity=".95"/>
+              <stop offset=".7" stop-color="#a9d3ee" stop-opacity=".6"/>
+              <stop offset="1" stop-color="#a9d3ee" stop-opacity=".1"/>
+            </linearGradient>
+          </defs>
+          <!-- shoulders and apron -->
+          <path d="M28 250c0-72 24-112 72-120 48 8 72 48 72 120z" fill="url(#spirit)"/>
+          <path d="M72 138l28 20 28-20v112H72z" fill="#ffffff" opacity=".28"/>
+          <path d="M72 138l28 20 28-20" stroke="#6f93ad" stroke-width="2" fill="none"/>
+          <!-- head -->
+          <ellipse cx="100" cy="80" rx="31" ry="38" fill="url(#spirit)"/>
+          <!-- apothecary cap -->
+          <path d="M70 58c2-24 20-34 30-34s28 10 30 34c-18-8-42-8-60 0z" fill="#e8f6ff" opacity=".85"/>
+          <!-- mutton chops and wisps of hair -->
+          <path d="M70 70c-8 8-8 26 2 34 2-12 4-22 6-30zM130 70c8 8 8 26-2 34-2-12-4-22-6-30z" fill="#f4fbff" opacity=".7"/>
+          <!-- spectacles -->
+          <circle cx="86" cy="80" r="10" fill="none" stroke="#4d6f89" stroke-width="2"/>
+          <circle cx="114" cy="80" r="10" fill="none" stroke="#4d6f89" stroke-width="2"/>
+          <path d="M96 80h8" stroke="#4d6f89" stroke-width="2"/>
+          <circle class="eye" cx="86" cy="80" r="3.2" fill="#eaffff"/>
+          <circle class="eye" cx="114" cy="80" r="3.2" fill="#eaffff"/>
+          <!-- nose, mouth -->
+          <path d="M100 86l-3 9h6" stroke="#6f93ad" stroke-width="1.6" fill="none"/>
+          <path d="M91 106c6 4 12 4 18 0" stroke="#4d6f89" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <!-- sleeves drifting forward -->
+          <path d="M34 214c-14 10-22 26-20 36 14-4 26-14 36-26zM166 214c14 10 22 26 20 36-14-4-26-14-36-26z" fill="url(#spirit)" opacity=".8"/>
+        </svg>
+      </div>
+
+      <p class="whisper" id="whisper" aria-hidden="true"></p>
+
+      <div class="counter" aria-hidden="true"><span class="counter-name">Ambrose Quill, a made-up ghost</span></div>
+    </section>
+
     <section class="shop" id="shop" aria-label="Shelves of apothecary jars">
       <p class="loading" id="loading">Lighting the candles&hellip;</p>
     </section>
   </main>
 
   <footer class="foot">
+    <div class="petals" id="petals" aria-hidden="true"></div>
     <p>I am a made-up ghost telling old stories from a checked fact sheet. I can't tell you what to take or avoid. For your health, ask a doctor or pharmacist.</p>
   </footer>
+
+  <div class="fog fog-a" aria-hidden="true"></div>
+  <div class="fog fog-b" aria-hidden="true"></div>
 
   <dialog id="card" aria-labelledby="card-title">
     <article>

@@ -5,7 +5,10 @@
     {
       "id": "willow-bark",
       "name": "Willow bark",
-      "jar": { "label": "Salix", "color": "#b98b4a" },
+      "jar": {
+        "label": "Cortex Salicis",
+        "color": "#b98b4a"
+      },
       "poison": false,
       "then": [
         "Willow was used for fever in ancient times. In 1763 the Rev. Edward Stone wrote to the Royal Society about it, reporting about 50 patients.",
@@ -14,15 +17,27 @@
       ],
       "now": "Modern aspirin, a medicine with real risks. A doctor or pharmacist decides if it suits a person.",
       "sources": [
-        { "title": "Aspirin: The Story of a Wonder Drug (BMJ, via PMC)", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC535471/" },
-        { "title": "Felix Hoffmann (Science History Institute)", "url": "https://www.sciencehistory.org/education/scientific-biographies/felix-hoffmann/" },
-        { "title": "The Story of Aspirin (National Library of Medicine)", "url": "https://www.nlm.nih.gov/exhibition/the-story-of-aspirin/index.html" }
+        {
+          "title": "Aspirin: The Story of a Wonder Drug (BMJ, via PMC)",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC535471/"
+        },
+        {
+          "title": "Felix Hoffmann (Science History Institute)",
+          "url": "https://www.sciencehistory.org/education/scientific-biographies/felix-hoffmann/"
+        },
+        {
+          "title": "The Story of Aspirin (National Library of Medicine)",
+          "url": "https://www.nlm.nih.gov/exhibition/the-story-of-aspirin/index.html"
+        }
       ]
     },
     {
       "id": "cinchona-quinine",
       "name": "Cinchona bark and quinine",
-      "jar": { "label": "Cinchona", "color": "#a4573c" },
+      "jar": {
+        "label": "Cortex Cinchonae",
+        "color": "#a4573c"
+      },
       "poison": false,
       "then": [
         "Jesuit missionaries brought the bark to Europe in the 1600s as a fever remedy. The tale of the Countess of Chinchón being cured by it is a legend.",
@@ -31,16 +46,31 @@
       ],
       "now": "Modern antimalarial medicines.",
       "sources": [
-        { "title": "Natural Products That Changed Society (PMC)", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8146924/" },
-        { "title": "Pierre-Joseph Pelletier (Britannica)", "url": "https://www.britannica.com/biography/Pierre-Joseph-Pelletier" },
-        { "title": "Malarial Subjects (NCBI Bookshelf)", "url": "https://www.ncbi.nlm.nih.gov/books/n/wt605891/ch1/" },
-        { "title": "Rabe-Kindler conversion confirmed, 2008 (PubMed)", "url": "https://pubmed.ncbi.nlm.nih.gov/18236503/" }
+        {
+          "title": "Natural Products That Changed Society (PMC)",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8146924/"
+        },
+        {
+          "title": "Pierre-Joseph Pelletier (Britannica)",
+          "url": "https://www.britannica.com/biography/Pierre-Joseph-Pelletier"
+        },
+        {
+          "title": "Malarial Subjects (NCBI Bookshelf)",
+          "url": "https://www.ncbi.nlm.nih.gov/books/n/wt605891/ch1/"
+        },
+        {
+          "title": "Rabe-Kindler conversion confirmed, 2008 (PubMed)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/18236503/"
+        }
       ]
     },
     {
       "id": "foxglove",
       "name": "Foxglove",
-      "jar": { "label": "Digitalis", "color": "#8a5a9e" },
+      "jar": {
+        "label": "Digitalis",
+        "color": "#8a5a9e"
+      },
       "poison": true,
       "then": [
         "In 1775 William Withering learned of a country woman's herbal remedy for dropsy. It contained about 20 herbs, and he singled out foxglove.",
@@ -48,14 +78,23 @@
       ],
       "now": "Digitalis-derived heart medicines, still prescribed today.",
       "sources": [
-        { "title": "An Account of the Fox Glove (PMC)", "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5545334/" },
-        { "title": "William Withering (Linda Hall Library)", "url": "https://www.lindahall.org/about/news/scientist-of-the-day/william-withering/" }
+        {
+          "title": "An Account of the Fox Glove (PMC)",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5545334/"
+        },
+        {
+          "title": "William Withering (Linda Hall Library)",
+          "url": "https://www.lindahall.org/about/news/scientist-of-the-day/william-withering/"
+        }
       ]
     },
     {
       "id": "laudanum",
       "name": "Laudanum",
-      "jar": { "label": "Laudanum", "color": "#6e2f2f" },
+      "jar": {
+        "label": "Tinctura Opii",
+        "color": "#6e2f2f"
+      },
       "poison": true,
       "then": [
         "The name is credited to Paracelsus (16th century), for an opium preparation. Thomas Sydenham published his own laudanum recipe in the 1660s–1670s, a tincture of opium in wine with spices.",
@@ -64,16 +103,31 @@
       ],
       "now": "Morphine and today's tightly controlled opioid medicines.",
       "sources": [
-        { "title": "Thomas Sydenham (Britannica)", "url": "https://www.britannica.com/biography/Thomas-Sydenham" },
-        { "title": "Thomas De Quincey (Britannica)", "url": "https://www.britannica.com/biography/Thomas-De-Quincey" },
-        { "title": "Friedrich Sertürner (Britannica)", "url": "https://www.britannica.com/biography/Friedrich-Serturner" },
-        { "title": "Reciprocal Evolution of Opiate Science (PMC)", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5478244/" }
+        {
+          "title": "Thomas Sydenham (Britannica)",
+          "url": "https://www.britannica.com/biography/Thomas-Sydenham"
+        },
+        {
+          "title": "Thomas De Quincey (Britannica)",
+          "url": "https://www.britannica.com/biography/Thomas-De-Quincey"
+        },
+        {
+          "title": "Friedrich Sertürner (Britannica)",
+          "url": "https://www.britannica.com/biography/Friedrich-Serturner"
+        },
+        {
+          "title": "Reciprocal Evolution of Opiate Science (PMC)",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5478244/"
+        }
       ]
     },
     {
       "id": "leeches",
       "name": "Leeches",
-      "jar": { "label": "Hirudo", "color": "#3f5a3c" },
+      "jar": {
+        "label": "Hirudo",
+        "color": "#3f5a3c"
+      },
       "poison": false,
       "then": [
         "Leeches were used for centuries in bloodletting.",
@@ -82,14 +136,23 @@
       ],
       "now": "A narrow, supervised role in reconstructive surgery.",
       "sources": [
-        { "title": "FDA 510(k) K040187, Medicinal Leeches", "url": "https://www.accessdata.fda.gov/cdrh_docs/pdf4/k040187.pdf" },
-        { "title": "Commercially available medicinal leeches are not Hirudo medicinalis (PubMed)", "url": "https://pubmed.ncbi.nlm.nih.gov/17426015/" }
+        {
+          "title": "FDA 510(k) K040187, Medicinal Leeches",
+          "url": "https://www.accessdata.fda.gov/cdrh_docs/pdf4/k040187.pdf"
+        },
+        {
+          "title": "Commercially available medicinal leeches are not Hirudo medicinalis (PubMed)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/17426015/"
+        }
       ]
     },
     {
       "id": "mercury",
       "name": "Mercury and calomel",
-      "jar": { "label": "Hydrargyrum", "color": "#7d8794" },
+      "jar": {
+        "label": "Hydrargyrum",
+        "color": "#7d8794"
+      },
       "poison": true,
       "then": [
         "Mercury was the syphilis treatment for about four centuries, with severe harm such as organ failure, nerve damage and tooth loss.",
@@ -98,16 +161,31 @@
       ],
       "now": "Antibiotics, and strict limits on mercury.",
       "sources": [
-        { "title": "Acrodynia (Britannica)", "url": "https://www.britannica.com/science/acrodynia" },
-        { "title": "The puzzle of pink disease (PMC)", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1297367/" },
-        { "title": "The history of syphilis, part two (Science Museum)", "url": "https://www.sciencemuseum.org.uk/objects-and-stories/history-syphilis-part-two-treatments-cures-and-legislation" },
-        { "title": "Hallmarks in history of syphilis therapeutics (PubMed)", "url": "https://pubmed.ncbi.nlm.nih.gov/24335464/" }
+        {
+          "title": "Acrodynia (Britannica)",
+          "url": "https://www.britannica.com/science/acrodynia"
+        },
+        {
+          "title": "The puzzle of pink disease (PMC)",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1297367/"
+        },
+        {
+          "title": "The history of syphilis, part two (Science Museum)",
+          "url": "https://www.sciencemuseum.org.uk/objects-and-stories/history-syphilis-part-two-treatments-cures-and-legislation"
+        },
+        {
+          "title": "Hallmarks in history of syphilis therapeutics (PubMed)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/24335464/"
+        }
       ]
     },
     {
       "id": "arsenic",
       "name": "Arsenic tonics",
-      "jar": { "label": "Arsenicum", "color": "#c9c27a" },
+      "jar": {
+        "label": "Liquor Arsenicalis",
+        "color": "#c9c27a"
+      },
       "poison": true,
       "then": [
         "Fowler's solution was a 1% potassium arsenite solution made by Thomas Fowler of Edinburgh. It was used for many ailments, including leukaemia from the 1860s onward.",
@@ -116,14 +194,23 @@
       ],
       "now": "Fowler's solution is not used today. Arsenic trioxide is given only intravenously, under specialist care, for acute promyelocytic leukaemia.",
       "sources": [
-        { "title": "Resurrection of Oral Arsenic Trioxide for APL (PMC)", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7418518/" },
-        { "title": "The history of arsenic trioxide in cancer therapy (PubMed)", "url": "https://pubmed.ncbi.nlm.nih.gov/11331433/" }
+        {
+          "title": "Resurrection of Oral Arsenic Trioxide for APL (PMC)",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7418518/"
+        },
+        {
+          "title": "The history of arsenic trioxide in cancer therapy (PubMed)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/11331433/"
+        }
       ]
     },
     {
       "id": "cod-liver-oil",
       "name": "Cod liver oil",
-      "jar": { "label": "Oleum", "color": "#d3a64a" },
+      "jar": {
+        "label": "Oleum Jecoris",
+        "color": "#d3a64a"
+      },
       "poison": false,
       "then": [
         "Trousseau (1861) judged it a cure for rickets.",
@@ -132,10 +219,20 @@
       ],
       "now": "Vitamin D, and fortified milk in the 1930s–1940s, which greatly reduced rickets.",
       "sources": [
-        { "title": "Vitamin D, cod-liver oil, sunlight, and rickets (PubMed)", "url": "https://pubmed.ncbi.nlm.nih.gov/12897318/" },
-        { "title": "History of the discovery of vitamin D (PMC)", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3899558/" },
-        { "title": "Adolf Windaus, Nobel Prize in Chemistry 1928", "url": "https://www.nobelprize.org/prizes/chemistry/1928/windaus/facts/" }
+        {
+          "title": "Vitamin D, cod-liver oil, sunlight, and rickets (PubMed)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/12897318/"
+        },
+        {
+          "title": "History of the discovery of vitamin D (PMC)",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3899558/"
+        },
+        {
+          "title": "Adolf Windaus, Nobel Prize in Chemistry 1928",
+          "url": "https://www.nobelprize.org/prizes/chemistry/1928/windaus/facts/"
+        }
       ]
     }
-  ]
+  ],
+  "greeting": "Welcome, traveller. Mind the candles. Which jar shall we open?"
 }
