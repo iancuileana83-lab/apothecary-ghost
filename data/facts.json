@@ -68,7 +68,7 @@
       "id": "foxglove",
       "name": "Foxglove",
       "jar": {
-        "label": "Digitalis",
+        "label": "Folia Digitalis",
         "color": "#8a5a9e"
       },
       "poison": true,
@@ -208,7 +208,7 @@
       "id": "cod-liver-oil",
       "name": "Cod liver oil",
       "jar": {
-        "label": "Oleum Jecoris",
+        "label": "Oleum Jecoris Aselli",
         "color": "#d3a64a"
       },
       "poison": false,

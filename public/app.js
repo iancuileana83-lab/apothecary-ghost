@@ -1,4 +1,6 @@
 import { buildMotes, buildPapel, makeCandle, makeCobweb, scatterPetals } from './decor.js';
+import { createHaunt, prefersCalm } from './haunt.js';
+import { writeLines } from './quill.js';
 import { createAmbient } from './sound.js';
 
 const SKULL = `
@@ -24,8 +26,9 @@ const WAX = `
 function jarSvg(remedy) {
   const words = remedy.jar.label.split(' ');
   const longest = Math.max(...words.map((w) => w.length));
-  const size = Math.min(words.length > 1 ? 11 : 13, 58 / (longest * 0.56)).toFixed(1);
-  const ys = words.length > 1 ? [74, 87] : [80];
+  const cap = [13, 11, 9.5][words.length - 1];
+  const size = Math.min(cap, 58 / (longest * 0.56)).toFixed(1);
+  const ys = [[80], [74, 87], [70, 80, 90]][words.length - 1];
   const lines = words
     .map((w, i) => `<text x="50" y="${ys[i]}" font-size="${size}" text-anchor="middle">${w}</text>`)
     .join('');
@@ -46,7 +49,15 @@ const card = document.getElementById('card');
 const whisper = document.getElementById('whisper');
 const ghost = document.getElementById('ghost');
 
+const ambient = createAmbient();
+const haunt = createHaunt({
+  ghost,
+  scene: document.querySelector('.scene'),
+  windowEl: document.getElementById('window'),
+});
+
 let greeting = '';
+let guttered = null;
 let whisperTimer;
 
 function el(tag, props = {}, text) {
@@ -80,6 +91,39 @@ function whisperFor(remedy, warning) {
   return remedy.poison ? warning : firstSentence(remedy.then[0]);
 }
 
+// Over a poison jar the ghost turns sickly green and the nearest candle gutters out;
+// when the visitor moves away it relights.
+function relight() {
+  if (!guttered) return;
+  const candle = guttered;
+  guttered = null;
+  candle.classList.remove('out');
+  candle.classList.add('relight');
+  candle
+    .querySelector('.flame')
+    .addEventListener('animationend', () => candle.classList.remove('relight'), { once: true });
+}
+
+function overPoison(jar, over) {
+  ghost.classList.toggle('sick', over);
+  relight();
+  if (!over || prefersCalm()) return;
+  const jb = jar.getBoundingClientRect();
+  const jx = jb.left + jb.width / 2;
+  const jy = jb.top + jb.height / 2;
+  let best = null;
+  let bestDist = Infinity;
+  for (const c of document.querySelectorAll('.candle')) {
+    const b = c.getBoundingClientRect();
+    const d = Math.hypot(b.left + b.width / 2 - jx, b.top + b.height / 2 - jy);
+    if (d < bestDist) [best, bestDist] = [c, d];
+  }
+  if (best) {
+    best.classList.add('out');
+    guttered = best;
+  }
+}
+
 function makeJar(remedy, warning) {
   const btn = el('button', { type: 'button', className: 'jar' });
   btn.setAttribute('aria-label', remedy.name + (remedy.poison ? '. ' + warning : ''));
@@ -88,10 +132,18 @@ function makeJar(remedy, warning) {
   btn.innerHTML = jarSvg(remedy);
   if (remedy.poison) btn.classList.add('poison');
   const line = whisperFor(remedy, warning);
-  btn.addEventListener('pointerenter', () => say(line));
-  btn.addEventListener('focus', () => say(line));
-  btn.addEventListener('pointerleave', sayGreeting);
-  btn.addEventListener('blur', sayGreeting);
+  const enter = () => {
+    say(line);
+    if (remedy.poison) overPoison(btn, true);
+  };
+  const leave = () => {
+    sayGreeting();
+    if (remedy.poison) overPoison(btn, false);
+  };
+  btn.addEventListener('pointerenter', enter);
+  btn.addEventListener('focus', enter);
+  btn.addEventListener('pointerleave', leave);
+  btn.addEventListener('blur', leave);
   btn.addEventListener('click', () => openCard(remedy, warning));
   return btn;
 }
@@ -118,8 +170,12 @@ function openCard(remedy, warning) {
   const warn = document.getElementById('card-warning');
   warn.hidden = !remedy.poison;
   warn.textContent = remedy.poison ? warning : '';
-  document.getElementById('card-then').replaceChildren(...remedy.then.map((t) => el('li', {}, t)));
-  document.getElementById('card-now').textContent = remedy.now;
+  const thenItems = remedy.then.map((t) => el('li', {}, t));
+  document.getElementById('card-then').replaceChildren(...thenItems);
+  const now = document.getElementById('card-now');
+  now.textContent = remedy.now;
+  card.classList.remove('skip', 'writing');
+  ambient.stopScratch();
   document.getElementById('card-sources').replaceChildren(
     ...remedy.sources.map((s) => {
       const li = el('li');
@@ -128,9 +184,21 @@ function openCard(remedy, warning) {
     }),
   );
   card.showModal();
+  // the banner and the poison warning stay visible at once; only the history is written out
+  if (!prefersCalm()) {
+    const { segments } = writeLines([...thenItems, now]);
+    card.classList.add('writing');
+    ambient.scratch(segments);
+  }
 }
 
 document.getElementById('card-close').addEventListener('click', () => card.close());
+card.addEventListener('close', () => ambient.stopScratch());
+// a click anywhere on the card finishes the writing at once
+card.querySelector('article').addEventListener('click', () => {
+  card.classList.add('skip');
+  ambient.stopScratch();
+});
 card.addEventListener('click', (e) => {
   if (e.target === card) card.close();
 });
@@ -143,7 +211,6 @@ const counter = document.querySelector('.counter');
 counter.append(makeCandle('counter-candle left'), makeCandle('counter-candle right'));
 
 // optional ambient sound, off until the visitor asks for it
-const ambient = createAmbient();
 const soundBtn = document.getElementById('sound');
 soundBtn.addEventListener('click', async () => {
   try {
@@ -169,6 +236,8 @@ async function init() {
       makeShelf(facts.remedies.slice(0, half), facts.poisonWarning),
       makeShelf(facts.remedies.slice(half), facts.poisonWarning),
     );
+    haunt.setJars([...shop.querySelectorAll('.jar')]);
+    haunt.start();
   } catch {
     shop.replaceChildren(el('p', { className: 'loading' }, 'The shelves are dark. Please reload the page.'));
   }

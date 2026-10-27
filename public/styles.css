@@ -184,13 +184,62 @@ h1 {
   margin-top: 8px;
 }
 
-.window {
+.window-wrap {
   position: absolute;
   left: 2%;
   top: 6px;
   width: clamp(70px, 14vw, 120px);
+}
+.window {
+  display: block;
+  width: 100%;
   height: auto;
   filter: drop-shadow(0 0 14px rgba(140, 170, 255, 0.35));
+}
+.window-glow {
+  position: absolute;
+  inset: -30%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(215, 230, 255, 0.85), rgba(150, 180, 255, 0.25) 45%, transparent 70%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+}
+/* one slow swell of light, never a flash: it rises and falls over about three seconds */
+.window-wrap.flash .window-glow { animation: swell 3.4s ease-in-out 1; }
+.moonbeam.flash { animation: beam-swell 3.4s ease-in-out 1; }
+@keyframes swell {
+  0% { opacity: 0; }
+  35% { opacity: 0.6; }
+  60% { opacity: 0.4; }
+  100% { opacity: 0; }
+}
+@keyframes beam-swell {
+  0%, 100% { opacity: 1; }
+  35% { opacity: 1.9; filter: brightness(1.8); }
+  60% { filter: brightness(1.4); }
+}
+
+/* words written in the mist on the glass */
+.mist {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, 0) rotate(-5deg);
+  font: clamp(0.7rem, 1.7vw, 1rem) var(--hand);
+  white-space: nowrap;
+  color: rgba(225, 238, 255, 0.85);
+  text-shadow: 0 0 6px rgba(200, 225, 255, 0.8);
+  filter: blur(0.5px);
+  opacity: 0;
+  pointer-events: none;
+}
+.window-wrap.writing .mist { animation: mist 10s ease-in-out 1 forwards; }
+@keyframes mist {
+  0% { opacity: 0; clip-path: inset(0 100% 0 0); }
+  38% { opacity: 0.85; clip-path: inset(0 0 0 0); }
+  72% { opacity: 0.85; clip-path: inset(0 0 0 0); }
+  100% { opacity: 0; clip-path: inset(0 0 0 0); }
 }
 
 .ghost {
@@ -199,21 +248,26 @@ h1 {
   bottom: 38px;
   width: clamp(150px, 28vw, 215px);
   margin-left: calc(clamp(150px, 28vw, 215px) / -2);
+  will-change: transform, opacity;
   animation: haunt 12s infinite ease-in-out;
 }
 .ghost svg {
   display: block;
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 0 14px rgba(150, 215, 255, 0.75));
+  filter: hue-rotate(0deg) saturate(1) drop-shadow(0 0 14px rgba(150, 215, 255, 0.75));
+  transition: filter 0.7s ease;
   animation: shimmer-ghost 6.5s infinite;
 }
-.ghost .eye { animation: eyes 5s infinite; }
-.ghost.listening svg { filter: drop-shadow(0 0 20px rgba(190, 235, 255, 1)); }
+.ghost .eye { animation: eyes 5s infinite; transition: transform 0.14s ease-out, r 0.5s ease; }
+.ghost.listening svg { filter: hue-rotate(0deg) saturate(1) drop-shadow(0 0 20px rgba(190, 235, 255, 1)); }
+/* over a poison jar: sickly green, eyes aglow */
+.ghost.sick svg { filter: hue-rotate(-82deg) saturate(2.4) drop-shadow(0 0 24px rgba(120, 255, 130, 0.9)); }
+.ghost.sick .eye { fill: #e2ffbd; r: 5.4px; filter: drop-shadow(0 0 5px #8dff6a); }
 
 @keyframes haunt {
-  0%, 100% { opacity: 0.28; transform: translateY(6px); }
-  35%, 65% { opacity: 0.8; transform: translateY(-4px); }
+  0%, 100% { opacity: 0.28; }
+  35%, 65% { opacity: 0.8; }
 }
 @keyframes shimmer-ghost {
   0%, 100% { opacity: 1; }
@@ -316,6 +370,28 @@ h1 {
   50% { transform: scale(1.05, 0.9) rotate(-2deg); }
   75% { transform: scale(0.92, 1.06) rotate(1deg); }
 }
+.candle.out .flame { animation: gutter 1.2s ease-in forwards; }
+.candle.out .halo { animation: none; opacity: 0; transition: opacity 0.9s ease-in; }
+.candle.relight .flame { animation: relight 1.3s ease-out 1; }
+.candle.relight .halo { animation: relight-halo 1.3s ease-out 1; }
+@keyframes gutter {
+  0% { transform: scale(1, 1); opacity: 1; }
+  20% { transform: scale(0.55, 0.7) rotate(-6deg); }
+  38% { transform: scale(0.95, 1) rotate(3deg); }
+  60% { transform: scale(0.35, 0.4) rotate(6deg); }
+  80% { transform: scale(0.45, 0.5); opacity: 0.8; }
+  100% { transform: scale(0.05); opacity: 0; }
+}
+@keyframes relight {
+  0% { transform: scale(0.05); opacity: 0; }
+  40% { transform: scale(0.7, 0.8); opacity: 1; }
+  55% { transform: scale(0.4); }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes relight-halo {
+  from { opacity: 0; }
+  to { opacity: 0.85; }
+}
 @keyframes halo {
   0%, 100% { opacity: 0.85; }
   30% { opacity: 0.55; }
@@ -373,7 +449,8 @@ h1 {
   border-radius: 8px;
   -webkit-tap-highlight-color: transparent;
   filter: drop-shadow(0 0 6px rgba(255, 190, 110, 0.22));
-  transition: filter 0.3s ease;
+  transform: translateY(calc(var(--lift, 0) * -1px));
+  transition: filter 0.3s ease, transform 0.45s ease-out;
 }
 .jar svg { width: 100%; max-width: 128px; height: auto; transform-origin: 50% 100%; }
 .jar:hover, .jar:focus-visible { filter: drop-shadow(0 0 14px rgba(255, 200, 120, 0.85)); }
@@ -462,13 +539,64 @@ dialog li { margin-bottom: 6px; }
 }
 .close:hover, .close:focus-visible { background: rgba(0, 0, 0, 0.1); outline: 2px solid #7c6340; }
 
+/* ---------- wandering spirits ---------- */
+
+.wisp {
+  position: fixed;
+  left: 0;
+  z-index: 6;
+  pointer-events: none;
+  animation: wisp-cross var(--dur) linear 1 forwards;
+}
+.wisp.reverse { animation-name: wisp-cross-back; }
+.wisp-body {
+  display: block;
+  width: 84px;
+  height: 26px;
+  border-radius: 60% 40% 50% 50%;
+  background:
+    radial-gradient(ellipse at 78% 50%, rgba(225, 248, 255, 0.85), rgba(170, 220, 255, 0.3) 38%, transparent 70%),
+    radial-gradient(ellipse at 30% 55%, rgba(170, 220, 255, 0.25), transparent 65%);
+  filter: blur(1.5px);
+  animation: wisp-bob 3.6s ease-in-out infinite;
+}
+.wisp.reverse .wisp-body { transform: scaleX(-1); }
+@keyframes wisp-cross {
+  0% { transform: translateX(-12vw); opacity: 0; }
+  12%, 82% { opacity: 0.7; }
+  100% { transform: translateX(105vw); opacity: 0; }
+}
+@keyframes wisp-cross-back {
+  0% { transform: translateX(105vw); opacity: 0; }
+  12%, 82% { opacity: 0.7; }
+  100% { transform: translateX(-12vw); opacity: 0; }
+}
+@keyframes wisp-bob {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 calc(var(--bob) * -1); }
+}
+
+/* ---------- the invisible quill ---------- */
+
+.writing .qw {
+  display: inline-block;
+  opacity: 0;
+  animation: quill 0.5s ease-out forwards;
+  animation-delay: var(--d);
+}
+.writing.skip .qw { animation: none; opacity: 1; }
+@keyframes quill {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: none; }
+}
+
 /* ---------- phones ---------- */
 
 @media (max-width: 640px) {
   .papel { height: 48px; }
   .flag:nth-child(even) { display: none; }
   .scene { height: 270px; }
-  .window { width: 62px; left: 0; }
+  .window-wrap { width: 62px; left: 0; }
   .whisper { font-size: 0.9rem; }
   .counter { left: 2%; right: 2%; }
   .counter-name { font-size: 0.7rem; }
@@ -491,6 +619,10 @@ dialog li { margin-bottom: 6px; }
     animation: none;
   }
   .ghost { opacity: 0.6; }
+  .ghost svg, .ghost .eye, .jar, .candle .flame { transition: none; }
+  .mist { opacity: 0.32; }
+  .wisp, .window-glow { display: none; }
+  .writing .qw { animation: none; opacity: 1; }
   .mote { opacity: 0.5; }
   .jar:hover svg, .jar:focus-visible svg { animation: none; transform: translateY(-3px); }
   .whisper { transition: none; }

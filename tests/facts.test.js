@@ -53,7 +53,10 @@ test('approved corrections are in place', () => {
 
 test('every jar has a Latin label and the ghost has the approved greeting', () => {
   for (const r of remedies) {
-    assert.match(r.jar.label, /^[A-Z][a-z]+( [A-Z][a-z]+)?$/, `${r.id} label`);
+    assert.match(r.jar.label, /^[A-Z][a-z]+( [A-Z][a-z]+){0,2}$/, `${r.id} label`);
   }
+  const label = (id) => remedies.find((r) => r.id === id).jar.label;
+  assert.equal(label('cod-liver-oil'), 'Oleum Jecoris Aselli');
+  assert.equal(label('foxglove'), 'Folia Digitalis');
   assert.equal(facts.greeting, 'Welcome, traveller. Mind the candles. Which jar shall we open?');
 });

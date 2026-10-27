@@ -6,6 +6,8 @@ export function createAmbient() {
   let master;
   let on = false;
   let bellTimer;
+  let noise;
+  let scratchGate;
 
   function build() {
     ctx = new AudioContext();
@@ -34,7 +36,7 @@ export function createAmbient() {
     breathe.start();
 
     // a thin wind through the shutters
-    const noise = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate);
+    noise = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate);
     const data = noise.getChannelData(0);
     for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
     const wind = ctx.createBufferSource();
@@ -73,7 +75,42 @@ export function createAmbient() {
     bellTimer = setTimeout(bell, 10000 + Math.random() * 15000);
   }
 
+  // a faint quill scratching, in bursts, for each { at, dur } segment (seconds from now)
+  function scratch(segments) {
+    if (!on) return;
+    stopScratch();
+    const start = ctx.currentTime;
+    const band = ctx.createBiquadFilter();
+    band.type = 'bandpass';
+    band.frequency.value = 2800;
+    band.Q.value = 1.2;
+    scratchGate = ctx.createGain();
+    band.connect(scratchGate).connect(master);
+    for (const { at, dur } of segments) {
+      for (let t = 0; t < dur; t += 0.07 + Math.random() * 0.09) {
+        const s = start + at + t;
+        const src = ctx.createBufferSource();
+        const env = ctx.createGain();
+        src.buffer = noise;
+        env.gain.setValueAtTime(0.0001, s);
+        env.gain.exponentialRampToValueAtTime(0.1 * (0.5 + Math.random()), s + 0.012);
+        env.gain.exponentialRampToValueAtTime(0.0001, s + 0.06);
+        src.connect(env).connect(band);
+        src.start(s, Math.random() * 1.5, 0.07);
+      }
+    }
+  }
+
+  function stopScratch() {
+    if (scratchGate) {
+      scratchGate.gain.setTargetAtTime(0, ctx.currentTime, 0.02);
+      scratchGate = null;
+    }
+  }
+
   return {
+    scratch,
+    stopScratch,
     // resolves to true when sound is now on, false when muted
     async toggle() {
       if (!ctx) build();
